@@ -1,15 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Product, ProductService } from '@Pages/service/product.service';
+import { IPost } from '@Shared/interface/IPost';
+import { ISectionContent } from '@Shared/interface/ISectionContent';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
+import { EditorModule } from 'primeng/editor';
+import { FileUploadModule } from 'primeng/fileupload';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { RatingModule } from 'primeng/rating';
 import { RippleModule } from 'primeng/ripple';
@@ -19,6 +24,7 @@ import { TagModule } from 'primeng/tag';
 import { TextareaModule } from 'primeng/textarea';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
+import { PostBuilderComponent } from './post-builder/post-builder.component';
 
 interface Column {
   field: string;
@@ -52,13 +58,20 @@ interface ExportColumn {
     TagModule,
     InputIconModule,
     IconFieldModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    PostBuilderComponent,
+    EditorModule,
+    MultiSelectModule,
+    FileUploadModule,
+    ReactiveFormsModule
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
   providers: [MessageService, ProductService, ConfirmationService]
 })
 export class PostComponent implements OnInit {
+  @ViewChild('postBuilderComponent') postBuilderComponent!: PostBuilderComponent;
+
   productDialog: boolean = false;
 
   products = signal<Product[]>([]);
@@ -77,11 +90,34 @@ export class PostComponent implements OnInit {
 
   cols!: Column[];
 
+  public formGroup: FormGroup;
+
+  public dialogConfigs = {
+    modal: true,
+    breakpoints: { '1445px': '98vw' },
+    style: { width: '1500px' },
+    draggable: false,
+    resizable: false,
+    showEffect: 'fade'
+  };
+
   constructor(
     private productService: ProductService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
-  ) {}
+    private confirmationService: ConfirmationService,
+    private fb: FormBuilder
+  ) {
+    this.formGroup = this.fb.group({
+      id: new FormControl<string>(''),
+      title: new FormControl<string>('', [Validators.required]),
+      description: new FormControl<string>('', [Validators.required]),
+      heroImage: new FormControl<string>('', [Validators.required]),
+      status: new FormControl<string>('', [Validators.required]),
+      category: new FormControl<string>('', [Validators.required]),
+      tags: new FormControl<string[]>([], [Validators.required]),
+      sections: this.fb.array<ISectionContent[]>([])
+    });
+  }
 
   exportCSV() {
     this.dt.exportCSV();
@@ -204,6 +240,16 @@ export class PostComponent implements OnInit {
   }
 
   saveProduct() {
+    const sectionForms = this.postBuilderComponent?.formGroup?.get('sections') as FormArray;
+    sectionForms.controls.forEach((control, index) => {
+      control.patchValue({ position: index + 1 });
+    });
+
+    const post: IPost = this.formGroup.getRawValue();
+    post.sections = sectionForms.controls.map((control) => control.value);
+
+    console.error('Post', post);
+
     this.submitted = true;
     let _products = this.products();
     if (this.product.name?.trim()) {
@@ -232,4 +278,12 @@ export class PostComponent implements OnInit {
       this.product = {};
     }
   }
+
+  dropdownItems = [
+    { name: 'Option 1', id: '1' },
+    { name: 'Option 2', id: '2' },
+    { name: 'Option 3', id: '3' },
+    { name: 'Option 4', id: '4' }
+  ];
+
 }

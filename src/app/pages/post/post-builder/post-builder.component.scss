@@ -1,0 +1,152 @@
+:host::ng-deep {
+  .lesson-builder {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--surface-border);
+    border-radius: 8px;
+    background-color: var(--surface-50);
+    .left-container {
+      display: flex;
+      flex-direction: column;
+      width: 140px;
+      border-right: 1px solid var(--surface-border);
+      height: 100%;
+      max-height: 100%;
+      overflow: hidden;
+
+      .top-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--surface-700);
+        line-height: 24px;
+        border-bottom: 2px dotted var(--surface-border);
+        min-height: 90px;
+        margin: 0 1rem;
+      }
+
+      .left-menu {
+        flex: 1;
+        max-height: 100%;
+        overflow: hidden;
+        overflow-y: auto;
+        padding: 1.5rem;
+        padding-bottom: 118px;
+
+        &__item {
+          width: 100px;
+          height: 100px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          border-radius: 8px;
+          background-color: var(--surface-card);
+          border: 1px solid var(--surface-border);
+          margin-bottom: 1.5rem;
+          -webkit-user-select: none;
+          /* Safari */
+          -moz-user-select: none;
+          /* Firefox */
+          -ms-user-select: none;
+          /* IE10+/Edge */
+          user-select: none;
+
+          /* Standard */
+          &--name {
+            color: var(--surface-600);
+            font-weight: 700;
+            font-size: 18px;
+            margin-top: 0.75rem;
+          }
+        }
+      }
+    }
+
+    .right-container {
+      width: calc(100% - 140px);
+
+      @media (max-width:1199px) {
+        width: 100%;
+        flex: 1;
+      }
+
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;
+
+      .top-right-container {
+        padding: 1.5rem;
+        padding-bottom: 0;
+        min-height: 120px;
+
+        @media (max-width: 767px) {
+          min-height: auto;
+
+          .btn-preview {
+            width: 100%;
+
+            button {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+
+    .right-content {
+      padding: 1.5rem;
+      background-color: var(--surface-card);
+      height: 100%;
+      border-bottom-right-radius: 7px;
+      border-top-right-radius: 7px;
+
+      max-height: 100%;
+      overflow: hidden;
+      overflow-y: auto;
+
+      @media (max-width:1444px) {
+        border-bottom-left-radius: 8px;
+      }
+
+      @media (max-width: 360px) {
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .p-dialog {
+        width: 100% !important;
+      }
+    }
+  }
+
+  .lesson-builder-table {
+    .p-datatable .p-datatable-tbody > tr > td,
+    .p-datatable .p-datatable-tfoot > tr > td {
+      background-color: white;
+      padding: 0;
+      border: 0;
+      font-weight: 400;
+      color: var(--text-color);
+    }
+  }
+
+  .btn-preview.w-full {
+    button {
+      width: 100%;
+    }
+  }
+
+  .btn-primary-icon {
+    @media (max-width: 767px) {
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

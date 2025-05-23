@@ -1,0 +1,15 @@
+<div class="grid" [formGroup]="formItem">
+  <div class="col-12">
+    <label for="mediaUrl" class="block font-bold mb-3">Spotify URL</label>
+    <input pInputText [type]="'text'" class="w-full" [formControl]="controls['mediaUrl']" [placeholder]="'Spotify URL'" id="mediaUrl" />
+  </div>
+  @if (mediaUrl) {
+    <div class="col-12">
+      <app-audio-embed-view [url]="mediaUrl" />
+    </div>
+  }
+  <div class="col-12">
+    <label for="description" class="block font-bold mb-3">Description</label>
+    <input pInputText [type]="'text'" class="w-full" [formControl]="controls['description']" [placeholder]="'Description'" id="description" [maxlength]="1000" />
+  </div>
+</div>

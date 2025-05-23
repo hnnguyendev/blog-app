@@ -1,0 +1,12 @@
+<p-panel styleClass="panel-custom mb-4">
+  <ng-template pTemplate="header">
+    <div class="header">
+      <ng-content select="[blockSortIcon]"></ng-content>
+    </div>
+  </ng-template>
+  <ng-content select="[blockContent]"></ng-content>
+  <div class="block-actions">
+    <p-button class="btn-duplicate-icon" [label]="'Duplicate'" icon="pi pi-clone" iconPos="left" (click)="onDuplicateSectionBlock()" />
+    <p-button class="btn-delete-icon" [label]="'Delete'" icon="pi pi-trash" iconPos="left" (click)="onDeleteSectionBlock()" />
+  </div>
+</p-panel>

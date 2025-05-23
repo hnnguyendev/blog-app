@@ -1,0 +1,26 @@
+<div class="lesson-empty">
+  @if (showEmptyHeader) {
+    <h4 class="font-bold">This Post is empty</h4>
+  }
+  <span class="mb-4">Drag an element from the toolbar or click the button below.</span>
+  <p-button type="button" class="btn-primary-icon" [label]="'Content Block'" icon="pi pi-plus" iconPos="left" (click)="toggleAddSectionBlock()" />
+</div>
+<p-dialog
+  class="select-content-type"
+  [header]="'Select a block type to add...'"
+  [(visible)]="isToggleSelectSection"
+  [modal]="dialogConfigs.modal"
+  [draggable]="dialogConfigs.draggable"
+  [breakpoints]="dialogConfigs.breakpoints"
+  [style]="dialogConfigs.style"
+  [focusOnShow]="false"
+>
+  <div class="content-menu-hoz">
+    @for (item of sectionTypes; track item) {
+      <div (click)="onSelectSection(item.value)" class="menu-item">
+        <img [src]="getIconUrl(item.value)" />
+        <span class="menu-item__name">{{ item?.label }}</span>
+      </div>
+    }
+  </div>
+</p-dialog>

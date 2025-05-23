@@ -1,0 +1,20 @@
+:host ::ng-deep {
+    .short-description {
+        textarea {
+            resize: none;
+            min-height: 130px;
+            max-height: 130px;
+            overflow: auto !important;
+        }
+    }
+
+    .p-disabled,
+    .p-component:disabled,
+    .p-multiselect.p-disabled,
+    .p-dropdown.p-disabled {
+        opacity: 0.9 !important;
+        background: var(--gray-3);
+        color: var(--dark-5);
+        border-color: var(--gray-3);
+    }
+}
