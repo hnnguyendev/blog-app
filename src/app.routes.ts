@@ -2,15 +2,30 @@ import { Routes } from '@angular/router';
 import { UserRouteAccessService } from '@Core/auth/user-route-access.service';
 import { Authority } from '@Core/config/authority.constants';
 import { LayoutComponent } from '@Layout/component/layout/layout.component';
+import { BlogComponent } from '@Pages/blog/blog.component';
+import { ArticleWidgetComponent } from '@Pages/blog/component/article-widget/article-widget.component';
+import { PostDetailsComponent } from '@Pages/blog/component/post-details/post-details.component';
 import { Dashboard } from '@Pages/dashboard/dashboard';
-import { Documentation } from '@Pages/documentation/documentation';
-import { Landing } from '@Pages/landing/landing';
 import { NotfoundComponent } from '@Pages/notfound/notfound.component';
 import { PostComponent } from '@Pages/post/post.component';
 import { UserComponent } from '@Pages/user/user.component';
 
 export const appRoutes: Routes = [
-  { path: '', component: Landing },
+  {
+    path: '',
+    component: BlogComponent,
+    children: [
+      {
+        path: '',
+        component: ArticleWidgetComponent
+      },
+      {
+        path: 'posts/:id',
+        component: PostDetailsComponent,
+        title: 'Post Details'
+      }
+    ]
+  },
   {
     path: 'admin',
     component: LayoutComponent,
@@ -31,7 +46,6 @@ export const appRoutes: Routes = [
         title: 'User Management'
       },
       { path: 'uikit', loadChildren: () => import('./app/pages/uikit/uikit.routes') },
-      { path: 'documentation', component: Documentation, title: 'Documentation' },
       { path: 'pages', loadChildren: () => import('./app/pages/pages.routes') }
     ],
     data: {

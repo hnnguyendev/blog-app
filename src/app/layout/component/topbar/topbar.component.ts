@@ -24,11 +24,11 @@ export class TopbarComponent {
   private readonly loginService = inject(LoginService);
   private readonly router = inject(Router);
 
-  toggleDarkMode() {
+  public toggleDarkMode() {
     this.layoutService.layoutConfig.update((state) => ({ ...state, darkTheme: !state.darkTheme }));
   }
 
-  logout(): void {
+  public logout(): void {
     this.loginService.logout();
     this.router.navigate(['/auth/login']);
   }

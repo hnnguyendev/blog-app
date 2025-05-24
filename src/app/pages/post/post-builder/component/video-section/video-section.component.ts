@@ -3,11 +3,12 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { convertToVimeoEmbedLink, convertToYouTubeEmbedLink, isVimeoLink, isYouTubeLink } from '@Shared/helper/media.helper';
 import { InputTextModule } from 'primeng/inputtext';
 import { VideoEmbedViewComponent } from '../video-embed-view/video-embed-view.component';
+import { TextareaModule } from 'primeng/textarea';
 
 @Component({
   selector: 'app-video-section',
   standalone: true,
-  imports: [ReactiveFormsModule, VideoEmbedViewComponent, InputTextModule],
+  imports: [ReactiveFormsModule, VideoEmbedViewComponent, InputTextModule, TextareaModule],
   templateUrl: './video-section.component.html',
   styleUrl: './video-section.component.scss'
 })

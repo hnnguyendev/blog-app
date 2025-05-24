@@ -1,7 +1,7 @@
-<div class="grid" [formGroup]="formItem">
-  <div class="col-12">
+<div class="grid gap-6" [formGroup]="formItem">
+  <div class="col-12 mt-4">
     <label for="mediaUrl" class="block font-bold mb-3">Spotify URL</label>
-    <input pInputText [type]="'text'" class="w-full" [formControl]="controls['mediaUrl']" [placeholder]="'Spotify URL'" id="mediaUrl" />
+    <input pInputText [type]="'text'" class="w-full" [formControl]="controls['mediaUrl']" [placeholder]="'Enter Audio URL'" id="mediaUrl" />
   </div>
   @if (mediaUrl) {
     <div class="col-12">
@@ -10,6 +10,6 @@
   }
   <div class="col-12">
     <label for="description" class="block font-bold mb-3">Description</label>
-    <input pInputText [type]="'text'" class="w-full" [formControl]="controls['description']" [placeholder]="'Description'" id="description" [maxlength]="1000" />
+    <textarea pTextarea id="description" [formControl]="controls['description']" placeholder="Enter Description" rows="3" cols="20" fluid></textarea>
   </div>
 </div>

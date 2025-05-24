@@ -94,8 +94,8 @@ export class PostComponent implements OnInit {
 
   public dialogConfigs = {
     modal: true,
-    breakpoints: { '1445px': '98vw' },
-    style: { width: '1500px' },
+    breakpoints: { '1536px': '98vw' },
+    style: { width: '1536px' },
     draggable: false,
     resizable: false,
     showEffect: 'fade'

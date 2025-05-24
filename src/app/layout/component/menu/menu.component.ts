@@ -41,7 +41,7 @@ export class MenuComponent implements OnInit {
         routerLink: ['/admin/pages'],
         items: [
           {
-            label: 'Landing',
+            label: 'Blog',
             icon: 'pi pi-fw pi-globe',
             routerLink: ['/']
           },
@@ -70,43 +70,12 @@ export class MenuComponent implements OnInit {
             label: 'Not Found',
             icon: 'pi pi-fw pi-exclamation-circle',
             routerLink: ['/notfound']
-          }
-        ]
-      },
-      {
-        label: 'Get Started',
-        items: [
+          },
           {
             label: 'Documentation',
             icon: 'pi pi-fw pi-book',
-            routerLink: ['/admin/documentation']
-          },
-          {
-            label: 'View Source',
-            icon: 'pi pi-fw pi-github',
-            url: 'https://github.com/primefaces/sakai-ng',
-            target: '_blank'
+            routerLink: ['/admin/pages/documentation']
           }
-        ]
-      },
-      {
-        label: 'UI Components',
-        items: [
-          { label: 'Form Layout', icon: 'pi pi-fw pi-id-card', routerLink: ['/admin/uikit/formlayout'] },
-          { label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/admin/uikit/input'] },
-          { label: 'Button', icon: 'pi pi-fw pi-mobile', class: 'rotated-icon', routerLink: ['/admin/uikit/button'] },
-          { label: 'Table', icon: 'pi pi-fw pi-table', routerLink: ['/admin/uikit/table'] },
-          { label: 'List', icon: 'pi pi-fw pi-list', routerLink: ['/admin/uikit/list'] },
-          { label: 'Tree', icon: 'pi pi-fw pi-share-alt', routerLink: ['/admin/uikit/tree'] },
-          { label: 'Panel', icon: 'pi pi-fw pi-tablet', routerLink: ['/admin/uikit/panel'] },
-          { label: 'Overlay', icon: 'pi pi-fw pi-clone', routerLink: ['/admin/uikit/overlay'] },
-          { label: 'Media', icon: 'pi pi-fw pi-image', routerLink: ['/admin/uikit/media'] },
-          { label: 'Menu', icon: 'pi pi-fw pi-bars', routerLink: ['/admin/uikit/menu'] },
-          { label: 'Message', icon: 'pi pi-fw pi-comment', routerLink: ['/admin/uikit/message'] },
-          { label: 'File', icon: 'pi pi-fw pi-file', routerLink: ['/admin/uikit/file'] },
-          { label: 'Chart', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/admin/uikit/charts'] },
-          { label: 'Timeline', icon: 'pi pi-fw pi-calendar', routerLink: ['/admin/uikit/timeline'] },
-          { label: 'Misc', icon: 'pi pi-fw pi-circle', routerLink: ['/admin/uikit/misc'] }
         ]
       }
     ];

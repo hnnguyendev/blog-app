@@ -1,0 +1,67 @@
+@mixin overlayImage {
+  width: 100%;
+  height: 192px;
+
+  @media (min-width: 480px) and (max-width: 767px) {
+    height: 350px;
+  }
+
+  @media (min-width: 850px) and (max-width: 1023px) {
+    height: 260px;
+  }
+}
+
+.card-item {
+  width: 100%;
+  height: 430px;
+  background: var(--surface-card);
+  border-radius: 10px;
+  position: relative;
+  border: 1px solid var(--surface-border);
+
+  @media (min-width: 480px) and (max-width: 767px) {
+    height: 584px;
+  }
+
+  @media (min-width: 850px) and (max-width: 1023px) {
+    height: 494px;
+  }
+
+  &__image {
+    @include overlayImage();
+    object-fit: cover;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+  }
+
+  &__content {
+    padding: 12px 17px 17px 17px;
+    height: 236px;
+
+    &-title {
+      font-size: 17px;
+      font-weight: 600;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-word;
+    }
+
+    &-description {
+      font-size: 16px;
+      line-height: 22px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-word;
+    }
+  }
+}
+
+.card-item:hover {
+  border: 1px solid var(--primary-color);
+}

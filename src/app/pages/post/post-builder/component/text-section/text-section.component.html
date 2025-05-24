@@ -1,4 +1,6 @@
-<div class="w-full" [formGroup]="formItem">
-  <label for="textContent" class="block font-bold mb-3">Text</label>
-  <p-editor class="w-full p-editor" [formControl]="control" id="textContent" [style]="{ height: '400px' }" />
+<div class="grid gap-6" [formGroup]="formItem">
+  <div class="col-12 mt-4">
+    <label for="textContent" class="block font-bold mb-3">Text</label>
+    <p-editor class="w-full p-editor" [formControl]="control" id="textContent" [style]="{ height: '400px' }" placeholder="Enter Content" />
+  </div>
 </div>

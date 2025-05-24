@@ -3,11 +3,12 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { convertSpotifyToEmbedUrl, isSpotifyLink } from '@Shared/helper/media.helper';
 import { InputTextModule } from 'primeng/inputtext';
 import { AudioEmbedViewComponent } from '../audio-embed-view/audio-embed-view.component';
+import { TextareaModule } from 'primeng/textarea';
 
 @Component({
   selector: 'app-audio-section',
   standalone: true,
-  imports: [ReactiveFormsModule, InputTextModule, AudioEmbedViewComponent],
+  imports: [ReactiveFormsModule, InputTextModule, AudioEmbedViewComponent, TextareaModule],
   templateUrl: './audio-section.component.html',
   styleUrl: './audio-section.component.scss'
 })

@@ -1,0 +1,25 @@
+.layout-topbar-action {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-color-secondary);
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--text-color);
+  transition: background-color var(--element-transition-duration);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--surface-hover);
+  }
+
+  i {
+    font-size: 1.25rem;
+  }
+
+  span {
+    font-size: 1rem;
+    display: none;
+  }
+}
