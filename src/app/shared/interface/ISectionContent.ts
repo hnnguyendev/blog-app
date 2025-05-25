@@ -3,12 +3,12 @@ import { ISectionFile } from './ISectionFile';
 
 export interface ISectionContent {
   id: string | null;
-  position: number;
-  heading: string;
-  textContent: string;
-  mediaUrl: string;
-  description: string;
-  photoCredit: string;
+  position?: number;
+  heading?: string;
+  textContent?: string;
+  mediaUrl?: string;
+  description?: string;
+  photoCredit?: string;
   sectionType: EPostSectionType;
-  sectionFiles: ISectionFile[] | null[];
+  sectionFiles?: ISectionFile[] | null[];
 }

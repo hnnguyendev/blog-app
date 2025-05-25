@@ -13,6 +13,6 @@ export class ArticleCardComponent {
 
   constructor(public router: Router) {}
   public navigateToDetail(): void {
-    this.router.navigate(['/posts', 'slug']);
+    this.router.navigate(['/post', 'slug']);
   }
 }

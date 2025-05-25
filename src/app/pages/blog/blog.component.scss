@@ -3,9 +3,6 @@
   top: 0;
   z-index: 9999;
   background: var(--surface-card);
-
-  @media (min-width: 1536px) {
-    padding-left: 11rem;
-    padding-right: 11rem;
-  }
+  max-width: 1532px;
+  margin: 0 auto;
 }

@@ -59,7 +59,7 @@ export class PostBuilderComponent implements OnChanges {
     if (this.postDetails) {
       if (this.postDetails?.sections?.length > 0) {
         this.postDetails?.sections
-          ?.sort((a: { position: number }, b: { position: number }) => a.position - b.position)
+          ?.sort((a, b) => (a.position! - b.position!))
           ?.forEach((item: ISectionContent) => {
             this.postContentForms.push(this.createFormControlBySectionType(item.sectionType, item));
           });

@@ -1,0 +1,17 @@
+:host ::ng-deep {
+  .post-details {
+    max-width: 1544px;
+    margin: 5px auto 20px;
+
+    @media (min-width: 1280px) {
+      padding-left: 200px;
+      padding-right: 35px;
+      margin: 10px auto 50px;
+    }
+  }
+  .post-content {
+    p {
+      font-size: 17px;
+    }
+  }
+}

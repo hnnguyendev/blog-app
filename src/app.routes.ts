@@ -20,9 +20,8 @@ export const appRoutes: Routes = [
         component: ArticleWidgetComponent
       },
       {
-        path: 'posts/:id',
+        path: 'post/:id',
         component: PostDetailsComponent,
-        title: 'Post Details'
       }
     ]
   },
