@@ -8,7 +8,7 @@ import { Login } from '@Pages/auth/login/login.model';
 import { StateStorageService } from './state-storage.service';
 
 type JwtToken = {
-  id_token: string;
+  accessToken: string;
 };
 
 @Injectable({ providedIn: 'root' })
@@ -32,6 +32,6 @@ export class AuthServerProvider {
   }
 
   private authenticateSuccess(response: JwtToken, rememberMe: boolean): void {
-    this.stateStorageService.storeAuthenticationToken(response.id_token, rememberMe);
+    this.stateStorageService.storeAuthenticationToken(response.accessToken, rememberMe);
   }
 }

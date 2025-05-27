@@ -1,17 +1,17 @@
 <div class="card-item cursor-pointer" (click)="navigateToDetail()">
-  <img class="card-item__image" [src]="imageUrl" alt="Image" />
+  <img class="card-item__image" [src]="post.heroImage || 'assets/img/developers.jpg'" alt="Image" />
 
   <div class="card-item__content flex flex-col">
-    <h3 class="card-item__content-title mb-2">Do You Really Know Java? Do You Really Know Java? Do You Really Know Java? Do You Really Know Java? Do You Really Know Java? Do You Really Know Java? Do You Really Know Java? Do You Really Know Java? Do You Really Know Java?</h3>
+    <h3 class="card-item__content-title mb-2">{{ post.title }}</h3>
     <span class="card-item__content-description text-muted-color">
-      From a humble passion project to a major language powering billions of devices worldwide, Java’s journey is anything but ordinary. Java has always been shaped by big ideas and the people behind them. Java has always been shaped by big ideas and the people behind them. Java has always been shaped by big ideas and the people behind them. Java has always been shaped by big ideas and the people behind them.
+      {{ post.description | htmlToText }}
     </span>
 
     <div class="flex items-center mt-auto">
-      <p-avatar [image]="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRisy83RJ1OMAH8vzu3RMooF1BYVViN0iCglA&s'" class="mr-4" [style]="{ 'width': '32px', 'height': '32px' }" shape="circle" />
+      <p-avatar [image]="post.imageUrl || 'assets/img/default-avatar.png'" class="mr-4" [style]="{ width: '32px', height: '32px' }" shape="circle" />
       <span class="inline-flex flex-col items-start">
-        <span class="text-sm text-muted-color"> {{ 'Nguyen Huu Nghia' }} </span>
-        <span class="text-sm text-muted-color"> {{ 'May 24, 2025' }} </span>
+        <span class="text-sm text-muted-color"> {{ post.authorName }} </span>
+        <span class="text-sm text-muted-color"> {{ post.lastUpdated | date }} </span>
       </span>
     </div>
   </div>

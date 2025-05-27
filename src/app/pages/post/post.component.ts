@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Product, ProductService } from '@Pages/service/product.service';
-import { IPost } from '@Shared/interface/IPost';
-import { ISectionContent } from '@Shared/interface/ISectionContent';
+import { IPost } from '@Shared/interface/blog/IPost';
+import { ISectionContent } from '@Shared/interface/blog/ISectionContent';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -241,12 +241,12 @@ export class PostComponent implements OnInit {
 
   saveProduct() {
     const sectionForms = this.postBuilderComponent?.formGroup?.get('sections') as FormArray;
-    sectionForms.controls.forEach((control, index) => {
-      control.patchValue({ position: index + 1 });
-    });
 
     const post: IPost = this.formGroup.getRawValue();
-    post.sections = sectionForms.controls.map((control) => control.value);
+    post.sections = sectionForms.controls.map((control, index) => ({
+      ...control.value,
+      position: index + 1
+    }));
 
     console.error('Post', post);
 
@@ -285,5 +285,4 @@ export class PostComponent implements OnInit {
     { name: 'Option 3', id: '3' },
     { name: 'Option 4', id: '4' }
   ];
-
 }

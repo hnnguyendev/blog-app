@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { VideoEmbedViewComponent } from '@Pages/post/post-builder/component/video-embed-view/video-embed-view.component';
 import { convertToVimeoEmbedLink, convertToYouTubeEmbedLink, isVimeoLink, isYouTubeLink } from '@Shared/helper/media.helper';
-import { ISectionContent } from '@Shared/interface/ISectionContent';
+import { ISectionContent } from '@Shared/interface/blog/ISectionContent';
 
 @Component({
   selector: 'app-video-view',

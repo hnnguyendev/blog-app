@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { ISectionContent } from '@Shared/interface/ISectionContent';
 import { SafePipe } from '@Shared/pipe/safe.pipe';
 
 @Component({
@@ -9,5 +8,5 @@ import { SafePipe } from '@Shared/pipe/safe.pipe';
   styleUrl: './text-view.component.scss'
 })
 export class TextViewComponent {
-  @Input() sectionContent!: ISectionContent;
+  @Input() textContent!: string;
 }

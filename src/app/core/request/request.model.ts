@@ -1,7 +1,7 @@
 export interface Pagination {
   page: number;
   size: number;
-  sort: string[];
+  sort?: string[];
 }
 
 export interface Search {

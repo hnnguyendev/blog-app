@@ -7,6 +7,10 @@ export const ENDPOINT = {
   AUTH: {
     AUTHENTICATE: '/api/authenticate',
     ACCOUNT: '/api/account',
+  },
+  BLOG: {
+    GET_BLOG_POSTS: '/api/posts/public',
+    GET_BLOG_POST_DETAILS: (slug: string) => `/api/posts/public/${slug}`,
   }
 };
 

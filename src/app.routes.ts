@@ -20,7 +20,7 @@ export const appRoutes: Routes = [
         component: ArticleWidgetComponent
       },
       {
-        path: 'post/:id',
+        path: 'blog/:slug',
         component: PostDetailsComponent,
       }
     ]

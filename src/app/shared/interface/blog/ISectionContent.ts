@@ -3,7 +3,7 @@ import { ISectionFile } from './ISectionFile';
 
 export interface ISectionContent {
   id: string | null;
-  position?: number;
+  position: number;
   heading?: string;
   textContent?: string;
   mediaUrl?: string;
