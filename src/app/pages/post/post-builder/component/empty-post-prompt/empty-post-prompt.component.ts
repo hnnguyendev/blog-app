@@ -20,7 +20,7 @@ export class EmptyPostPromptComponent {
     draggable: false,
     showEffect: 'fade',
     style: {},
-    breakpoints: { '960px': '90vw' }
+    breakpoints: { '768px': '90vw' }
   };
   public sectionTypes = POST_SECTION_TYPES;
   public isToggleSelectSection = false;

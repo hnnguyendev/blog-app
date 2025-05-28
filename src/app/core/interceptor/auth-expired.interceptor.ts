@@ -22,6 +22,11 @@ export class AuthExpiredInterceptor implements HttpInterceptor {
             this.loginService.logout();
             this.router.navigate(['/auth/login']);
           }
+
+          // TODO: handle error
+          if (err.status === 404) {
+            this.router.navigate(['/notfound']);
+          }
         }
       })
     );

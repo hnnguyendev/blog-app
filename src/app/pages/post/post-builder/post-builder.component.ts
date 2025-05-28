@@ -27,7 +27,7 @@ import { VideoSectionComponent } from './component/video-section/video-section.c
   }
 })
 export class PostBuilderComponent implements OnChanges {
-  @Input() postDetails!: IPost;
+  @Input() postDetails!: IPost | null;
 
   public sectionTypes = POST_SECTION_TYPES;
   public submitted: boolean = false;

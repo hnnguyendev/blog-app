@@ -3,7 +3,17 @@ import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/c
 import { ApplicationConfig, inject, LOCALE_ID } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { NavigationError, provideRouter, Router, RouterFeatures, TitleStrategy, withComponentInputBinding, withEnabledBlockingInitialNavigation, withInMemoryScrolling, withNavigationErrorHandler } from '@angular/router';
+import {
+  NavigationError,
+  provideRouter,
+  Router,
+  RouterFeatures,
+  TitleStrategy,
+  withComponentInputBinding,
+  withEnabledBlockingInitialNavigation,
+  withInMemoryScrolling,
+  withNavigationErrorHandler
+} from '@angular/router';
 import Aura from '@primeng/themes/aura';
 import { providePrimeNG } from 'primeng/config';
 import { AppPageTitleStrategy } from './app-page-title-strategy';
@@ -27,7 +37,12 @@ const routerFeatures: RouterFeatures[] = [
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(appRoutes, withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }), withEnabledBlockingInitialNavigation(), ...routerFeatures),
+    provideRouter(
+      appRoutes,
+      withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }),
+      withEnabledBlockingInitialNavigation(),
+      ...routerFeatures
+    ),
     provideHttpClient(withFetch()),
     provideAnimationsAsync(),
     providePrimeNG({ theme: { preset: Aura, options: { darkModeSelector: '.app-dark' } } }),

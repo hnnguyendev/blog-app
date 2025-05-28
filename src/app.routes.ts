@@ -21,7 +21,7 @@ export const appRoutes: Routes = [
       },
       {
         path: 'blog/:slug',
-        component: PostDetailsComponent,
+        component: PostDetailsComponent
       }
     ]
   },
@@ -44,7 +44,6 @@ export const appRoutes: Routes = [
         component: UserComponent,
         title: 'User Management'
       },
-      { path: 'uikit', loadChildren: () => import('./app/pages/uikit/uikit.routes') },
       { path: 'pages', loadChildren: () => import('./app/pages/pages.routes') }
     ],
     data: {

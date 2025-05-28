@@ -2,9 +2,10 @@ import { DatePipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { BlogService } from '@Pages/blog/service/blog.service';
 import { EPostSectionType } from '@Shared/enum/EPostSectionType';
 import { IResponseBlogPostDetails } from '@Shared/interface/blog/IResponseBlogPostDetails';
+import { BlogService } from '@Shared/service/blog.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { AvatarModule } from 'primeng/avatar';
 import { AudioViewComponent } from './audio-view/audio-view.component';
 import { StatementComponent } from './statement/statement.component';
@@ -23,6 +24,7 @@ export class PostDetailsComponent implements OnInit {
   private readonly titleService = inject(Title);
   private readonly blogService = inject(BlogService);
   private readonly route = inject(ActivatedRoute);
+  private readonly spinner = inject(NgxSpinnerService);
 
   public get EPostSectionType(): typeof EPostSectionType {
     return EPostSectionType;
@@ -37,12 +39,17 @@ export class PostDetailsComponent implements OnInit {
   }
 
   public getBlogPostDetails(slug: string): void {
+    this.spinner.hide();
     this.blogService.getBlogPostDetails(slug).subscribe({
       next: (res: IResponseBlogPostDetails) => {
         this.post = res;
         this.titleService.setTitle(this.post ? this.post.title : 'Post Details');
+        this.spinner.hide();
       },
-      error: () => console.error('Error fetching post details')
+      error: () => {
+        this.spinner.hide();
+        console.error('Error fetching post details');
+      }
     });
   }
 }

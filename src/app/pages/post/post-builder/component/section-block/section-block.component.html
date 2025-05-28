@@ -6,7 +6,7 @@
   </ng-template>
   <ng-content select="[blockContent]"></ng-content>
   <div class="block-actions">
-    <p-button class="btn-duplicate-icon" [label]="'Duplicate'" icon="pi pi-clone" iconPos="left" (click)="onDuplicateSectionBlock()" />
-    <p-button class="btn-delete-icon" [label]="'Delete'" icon="pi pi-trash" iconPos="left" (click)="onDeleteSectionBlock()" />
+    <p-button outlined="true" [label]="'Duplicate'" icon="pi pi-clone" iconPos="left" (click)="onDuplicateSectionBlock()" />
+    <p-button severity="danger" outlined="true" [label]="'Delete'" icon="pi pi-trash" iconPos="left" (click)="onDeleteSectionBlock()" />
   </div>
 </p-panel>

@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, inject, signal, viewChild } from 
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { FloatingConfiguratorComponent } from '@Layout/component/floating-configurator/floating-configurator.component';
+import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
@@ -29,6 +30,7 @@ export class LoginComponent implements AfterViewInit {
 
   private readonly loginService = inject(LoginService);
   private readonly router = inject(Router);
+  private readonly messageService = inject(MessageService);
 
   ngAfterViewInit(): void {
     this.username().nativeElement.focus();
@@ -43,7 +45,16 @@ export class LoginComponent implements AfterViewInit {
           this.router.navigate(['/admin/dashboard']);
         }
       },
-      error: () => this.authenticationError.set(true)
+      error: () => {
+        this.authenticationError.set(true);
+        this.messageService.add({
+          key: 'global-toast',
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to sign in! Please check your credentials and try again.',
+          life: 3000
+        });
+      }
     });
   }
 }

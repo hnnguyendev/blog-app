@@ -1,7 +1,14 @@
 <p-toolbar styleClass="mb-6">
   <ng-template #start>
-    <p-button label="New" icon="pi pi-plus" severity="secondary" class="mr-2" (onClick)="openNew()" />
-    <p-button severity="secondary" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length" />
+    <p-button label="New" icon="pi pi-plus" [outlined]="true" class="mr-2" (onClick)="openNew()" />
+    <p-button
+      severity="secondary"
+      label="Delete"
+      icon="pi pi-trash"
+      outlined
+      (onClick)="deleteSelectedPosts()"
+      [disabled]="!selectedPosts || !selectedPosts.length"
+    />
   </ng-template>
 
   <ng-template #end>
@@ -11,25 +18,28 @@
 
 <p-table
   #dt
-  [value]="products()"
-  [rows]="10"
+  [value]="posts()"
+  [rows]="rows"
   [columns]="cols"
   [paginator]="true"
   [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
   [tableStyle]="{ 'min-width': '75rem' }"
-  [(selection)]="selectedProducts"
+  [(selection)]="selectedPosts"
   [rowHover]="true"
   dataKey="id"
-  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} posts"
   [showCurrentPageReport]="true"
-  [rowsPerPageOptions]="[10, 20, 30]"
+  [rowsPerPageOptions]="rowsPerPageOptions"
+  [totalRecords]="totalRecords"
+  [lazy]="true"
+  (onLazyLoad)="loadPosts($event)"
 >
   <ng-template #caption>
-    <div class="flex items-center justify-between">
-      <h5 class="m-0">Manage Products</h5>
+    <div class="flex items-center justify-between" [formGroup]="searchForm">
+      <h5 class="m-0">Manage Posts</h5>
       <p-iconfield>
         <p-inputicon styleClass="pi pi-search" />
-        <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..." />
+        <input pInputText type="text" formControlName="searchKeyword" [formGroup]="formGroup" placeholder="Search..." />
       </p-iconfield>
     </div>
   </ng-template>
@@ -38,58 +48,103 @@
       <th style="width: 3rem">
         <p-tableHeaderCheckbox />
       </th>
-      <th style="min-width: 16rem">Code</th>
-      <th pSortableColumn="name" style="min-width: 16rem">
-        Name
-        <p-sortIcon field="name" />
+      <th pSortableColumn="title" style="min-width: 12rem">
+        Title
+        <p-sortIcon field="title" />
       </th>
-      <th>Image</th>
-      <th pSortableColumn="price" style="min-width: 8rem">
-        Price
-        <p-sortIcon field="price" />
-      </th>
+      <th style="width: 9rem">Image</th>
       <th pSortableColumn="category" style="min-width: 10rem">
         Category
         <p-sortIcon field="category" />
       </th>
-      <th pSortableColumn="rating" style="min-width: 12rem">
-        Reviews
-        <p-sortIcon field="rating" />
+      <th pSortableColumn="authorName" style="min-width: 10rem">
+        Author
+        <p-sortIcon field="authorName" />
       </th>
-      <th pSortableColumn="inventoryStatus" style="min-width: 12rem">
+      <th pSortableColumn="lastUpdated" style="min-width: 14rem">
+        Updated On
+        <p-sortIcon field="lastUpdated" />
+      </th>
+      <th pSortableColumn="status" style="min-width: 6rem">
         Status
-        <p-sortIcon field="inventoryStatus" />
+        <p-sortIcon field="status" />
       </th>
-      <th style="min-width: 12rem"></th>
+      <th style="min-width: 8rem"></th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>
+        <p-columnFilter type="text" field="title" matchMode="contains">
+          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+            <input type="text" pInputText [ngModel]="value" (ngModelChange)="filter($event)" placeholder="Search by title" ariaLabel="Filter Title" />
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th></th>
+      <th>
+        <p-columnFilter type="text" field="category" matchMode="contains">
+          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+            <input type="text" pInputText [ngModel]="value" (ngModelChange)="filter($event)" placeholder="Search by category" ariaLabel="Filter Category" />
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="text" field="authorName" matchMode="contains">
+          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+            <input type="text" pInputText [ngModel]="value" (ngModelChange)="filter($event)" placeholder="Search by author" ariaLabel="Filter Author" />
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="date" field="lastUpdated" placeholder="Search by updated on" ariaLabel="Filter Updated On" />
+      </th>
+      <th>
+        <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+            <p-select [ngModel]="value" [options]="postStatusOptions" (onChange)="filter($event.value)" placeholder="Select Status" [showClear]="true">
+              <ng-template let-option pTemplate="item">
+                <span>{{ option.label }}</span>
+              </ng-template>
+            </p-select>
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th></th>
     </tr>
   </ng-template>
-  <ng-template #body let-product>
+  <ng-template #body let-post>
     <tr>
       <td style="width: 3rem">
-        <p-tableCheckbox [value]="product" />
+        <p-tableCheckbox [value]="post" />
       </td>
-      <td style="min-width: 12rem">{{ product.code }}</td>
-      <td style="min-width: 16rem">{{ product.name }}</td>
+      <td style="min-width: 12rem">{{ post.title }}</td>
       <td>
-        <img [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" [alt]="product.name" style="width: 64px" class="rounded" />
+        <img [src]="post.heroImage || 'assets/img/developers.jpg'" [alt]="post.title" style="width: 64px" class="rounded" />
       </td>
-      <td>{{ product.price | currency: 'USD' }}</td>
-      <td>{{ product.category }}</td>
+      <td>{{ post.category }}</td>
+      <td>{{ post.authorName }}</td>
+      <td>{{ post.lastUpdated | date: 'short' }}</td>
       <td>
-        <p-rating [(ngModel)]="product.rating" [readonly]="true" />
-      </td>
-      <td>
-        <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)" />
+        <p-tag [value]="post.status" [severity]="getSeverity(post.status)" />
       </td>
       <td>
-        <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editProduct(product)" />
-        <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteProduct(product)" />
+        <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editPost(post)" />
+        <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deletePost(post)" />
       </td>
     </tr>
   </ng-template>
 </p-table>
 
-<p-dialog [(visible)]="productDialog" header="Post Details" [modal]="dialogConfigs.modal" [breakpoints]="dialogConfigs.breakpoints" [style]="dialogConfigs.style" [draggable]="dialogConfigs.draggable" [resizable]="dialogConfigs.resizable">
+<p-dialog
+  [(visible)]="postDialog"
+  class="post-details-dialog"
+  header="Post Details"
+  [modal]="dialogConfigs.modal"
+  [breakpoints]="dialogConfigs.breakpoints"
+  [style]="dialogConfigs.style"
+  [draggable]="dialogConfigs.draggable"
+  [resizable]="dialogConfigs.resizable"
+>
   <ng-template #content>
     <form [formGroup]="formGroup">
       <div class="flex flex-col gap-6">
@@ -100,7 +155,15 @@
           </div>
           <div class="col-span-12 md:col-span-3">
             <label for="status" class="block font-bold mb-3">Status</label>
-            <p-select id="status" formControlName="status" [options]="dropdownItems" optionValue="id" optionLabel="name" placeholder="Select One" class="w-full"></p-select>
+            <p-select
+              id="status"
+              formControlName="status"
+              [options]="postStatusOptions"
+              optionValue="value"
+              optionLabel="label"
+              placeholder="Select One"
+              class="w-full"
+            ></p-select>
           </div>
         </div>
 
@@ -112,11 +175,32 @@
         <div class="grid grid-cols-12 gap-4">
           <div class="col-span-12 lg:col-span-3">
             <label for="category" class="block font-bold mb-3">Category</label>
-            <p-select id="category" formControlName="category" [options]="dropdownItems" optionValue="id" optionLabel="name" placeholder="Select One" class="w-full"></p-select>
+            <p-select
+              id="category"
+              formControlName="category"
+              [options]="categoryOptions"
+              optionValue="id"
+              optionLabel="name"
+              placeholder="Select One"
+              [filter]="true"
+              class="w-full"
+            ></p-select>
           </div>
           <div class="col-span-12 lg:col-span-9">
             <label for="tags" class="block font-bold mb-3">Tags</label>
-            <p-multiselect id="tags" formControlName="tags" [options]="dropdownItems" placeholder="Select Tags" optionValue="id" optionLabel="name" display="chip" [filter]="true" [maxSelectedLabels]="99" fluid> </p-multiselect>
+            <p-multiselect
+              id="tags"
+              formControlName="tags"
+              [options]="tagOptions"
+              placeholder="Select Tags"
+              optionValue="id"
+              optionLabel="name"
+              display="chip"
+              [filter]="true"
+              [maxSelectedLabels]="99"
+              fluid
+            >
+            </p-multiselect>
           </div>
         </div>
 
@@ -127,13 +211,13 @@
     </form>
 
     <div class="mt-5">
-      <app-post-builder #postBuilderComponent></app-post-builder>
+      <app-post-builder #postBuilderComponent [postDetails]="post"></app-post-builder>
     </div>
   </ng-template>
 
   <ng-template #footer>
     <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
-    <p-button label="Save" icon="pi pi-check" (click)="saveProduct()" />
+    <p-button label="Save" icon="pi pi-check" (click)="savePost()" />
   </ng-template>
 </p-dialog>
 

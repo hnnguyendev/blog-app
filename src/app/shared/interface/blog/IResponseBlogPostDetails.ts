@@ -1,7 +1,7 @@
 import { EPostStatus } from '@Shared/enum/EPostStatus';
-import { ISectionContent } from './ISectionContent';
 import { ICategory } from '../category/ICategory';
 import { ITag } from '../tag/ITag';
+import { ISectionContent } from './ISectionContent';
 
 export interface IResponseBlogPostDetails {
   id: string;

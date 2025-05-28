@@ -25,10 +25,6 @@
           <span class="text-muted-color font-medium">Sign in to continue</span>
         </div>
 
-        @if (authenticationError()) {
-          <div class="alert alert-danger"><strong>Failed to sign in!</strong> Please check your credentials and try again.</div>
-        }
-
         <form (ngSubmit)="login()" [formGroup]="loginForm">
           <div>
             <label for="username" class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2">Username</label>

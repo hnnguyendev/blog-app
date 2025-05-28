@@ -1,8 +1,10 @@
-import { BlogService } from '@Pages/blog/service/blog.service';
+import { PAGINATION_DEFAULT } from '@Shared/constant/common.constants';
 import { ResponseBlogPost } from '@Shared/interface/blog/IResponseBlogPost';
+import { BlogService } from '@Shared/service/blog.service';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { combineLatest } from 'rxjs';
 import { ArticleCardComponent } from './article-card/article-card.component';
@@ -18,12 +20,13 @@ export class ArticleWidgetComponent implements OnInit {
   public isLoading = signal(false);
   public totalItems = signal(0);
   public page!: number;
-  public first: number = 0;
-  public rows: number = 12;
+  public first: number = PAGINATION_DEFAULT.PAGE;
+  public rows: number = PAGINATION_DEFAULT.ROWS_12;
 
   private readonly blogService = inject(BlogService);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly spinner = inject(NgxSpinnerService);
 
   ngOnInit(): void {
     this.handleNavigation();
@@ -40,6 +43,7 @@ export class ArticleWidgetComponent implements OnInit {
     this.isLoading.set(true);
     const pageIndex = this.page - 1;
 
+    this.spinner.show();
     this.blogService
       .getAllBlogPosts({
         page: pageIndex,
@@ -48,9 +52,13 @@ export class ArticleWidgetComponent implements OnInit {
       .subscribe({
         next: (res: HttpResponse<ResponseBlogPost[]>) => {
           this.isLoading.set(false);
+          this.spinner.hide();
           this.onSuccess(res.body, res.headers);
         },
-        error: () => this.isLoading.set(false)
+        error: () => {
+          this.isLoading.set(false);
+          this.spinner.hide();
+        }
       });
   }
 

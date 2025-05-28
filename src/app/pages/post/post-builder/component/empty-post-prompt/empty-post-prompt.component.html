@@ -1,9 +1,9 @@
-<div class="lesson-empty">
+<div class="empty-block-prompt">
   @if (showEmptyHeader) {
     <h4 class="font-bold">This Post is empty</h4>
   }
   <span class="mb-4">Drag an element from the toolbar or click the button below.</span>
-  <p-button type="button" class="btn-primary-icon" [label]="'Content Block'" icon="pi pi-plus" iconPos="left" (click)="toggleAddSectionBlock()" />
+  <p-button type="button" outlined="true" [label]="'Content Block'" icon="pi pi-plus" iconPos="left" (click)="toggleAddSectionBlock()" />
 </div>
 <p-dialog
   class="select-content-type"
