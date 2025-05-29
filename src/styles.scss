@@ -5,3 +5,5 @@
 @use './assets/demo/demo.scss';
 
 @use 'node_modules/ngx-spinner/animations/ball-scale-multiple.css';
+@use 'node_modules/quill/dist/quill.core.css';
+@import 'quill/dist/quill.snow.css';
