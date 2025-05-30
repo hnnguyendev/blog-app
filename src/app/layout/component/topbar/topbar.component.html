@@ -65,7 +65,7 @@
           <p-avatar [image]="accountRef?.imageUrl || 'assets/img/default-avatar.png'" class="mr-2" shape="circle" />
           <span class="inline-flex flex-col items-start">
             <span class="font-bold"> {{ accountRef?.firstName }} </span>
-            <span class="text-sm"> {{ accountRef?.authorities }} </span>
+            <span class="text-sm"> {{ primaryRole | role }} </span>
           </span>
         </button>
       </div>

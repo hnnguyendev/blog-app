@@ -1,0 +1,45 @@
+.p-editor-container {
+  .ql-editor::before {
+    color: var(--p-inputtext-placeholder-color) !important;
+    font-style: normal !important;
+  }
+}
+
+.editor-invalid {
+  .p-editor-container {
+    .p-editor-toolbar,
+    .p-editor-content {
+      border-left: 1px solid var(--p-select-invalid-border-color) !important;
+      border-right: 1px solid var(--p-select-invalid-border-color) !important;
+    }
+
+    .p-editor-toolbar {
+      border-top: 1px solid var(--p-select-invalid-border-color) !important;
+    }
+
+    .p-editor-content {
+      border-bottom: 1px solid var(--p-select-invalid-border-color) !important;
+    }
+  }
+
+  .p-editor-container:hover {
+    .p-editor-toolbar,
+    .p-editor-content {
+      border-left: 1px solid var(--p-inputtext-hover-border-color) !important;
+      border-right: 1px solid var(--p-inputtext-hover-border-color) !important;
+    }
+
+    .p-editor-toolbar {
+      border-top: 1px solid var(--p-inputtext-hover-border-color) !important;
+    }
+
+    .p-editor-content {
+      border-bottom: 1px solid var(--p-inputtext-hover-border-color) !important;
+    }
+  }
+
+  .ql-editor::before {
+    color: var(--p-inputtext-invalid-placeholder-color) !important;
+    font-style: normal !important;
+  }
+}

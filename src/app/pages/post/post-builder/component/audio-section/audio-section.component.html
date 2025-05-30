@@ -1,7 +1,18 @@
 <div class="grid gap-6" [formGroup]="formItem">
   <div class="col-12 mt-4">
-    <label for="mediaUrl" class="block font-bold mb-3">Spotify URL</label>
-    <input pInputText [type]="'text'" class="w-full" [formControl]="controls['mediaUrl']" [placeholder]="'Enter Audio URL'" id="mediaUrl" />
+    <label for="mediaUrl" class="font-bold inline-block mb-3 mr-1">Spotify URL</label><span class="text-red-600">*</span>
+    <input
+      pInputText
+      [type]="'text'"
+      class="w-full"
+      [formControl]="controls['mediaUrl']"
+      [placeholder]="'Enter Spotify URL'"
+      id="mediaUrl"
+      [ngClass]="{
+        'ng-dirty ng-invalid': submitted && controls['mediaUrl'].invalid
+      }"
+    />
+    <app-validation-message [submitted]="submitted" [control]="controls['mediaUrl']" [fieldName]="'Spotify url'" />
   </div>
   @if (mediaUrl) {
     <div class="col-12">

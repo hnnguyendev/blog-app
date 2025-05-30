@@ -8,21 +8,26 @@ import { AvatarModule } from 'primeng/avatar';
 import { StyleClassModule } from 'primeng/styleclass';
 import { ConfiguratorComponent } from '../configurator/configurator.component';
 import { AccountService } from '@Core/auth/account.service';
+import { RolePipe } from '@Shared/pipe/role.pipe';
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [RouterModule, CommonModule, StyleClassModule, ConfiguratorComponent, AvatarModule],
+  imports: [RouterModule, CommonModule, StyleClassModule, ConfiguratorComponent, AvatarModule, RolePipe],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.scss'
 })
 export class TopbarComponent {
-  items!: MenuItem[];
-  account = inject(AccountService).trackCurrentAccount();
+  public items!: MenuItem[];
+  public account = inject(AccountService).trackCurrentAccount();
 
   public readonly layoutService = inject(LayoutService);
   private readonly loginService = inject(LoginService);
   private readonly router = inject(Router);
+
+  public get primaryRole(): string {
+    return this.account()?.authorities[0] || '';
+  }
 
   public toggleDarkMode() {
     this.layoutService.layoutConfig.update((state) => ({ ...state, darkTheme: !state.darkTheme }));

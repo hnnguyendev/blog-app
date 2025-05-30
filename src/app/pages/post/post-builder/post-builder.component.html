@@ -1,4 +1,4 @@
-<div class="lesson-builder" [formGroup]="formGroup">
+<div class="post-builder" [formGroup]="formGroup">
   <div class="left-container hidden lg:block">
     <div class="top-title">Drag a block onto the post...</div>
     <div class="left-menu">
@@ -13,13 +13,27 @@
   <div class="right-container">
     <div class="right-content" pDroppable (onDrop)="dropContent()">
       @if (hasContent) {
-        <p-table class="lesson-builder-table" [value]="postContentForms.controls" dataKey="id" [metaKeySelection]="false" [scrollable]="true" scrollHeight="100%" [reorderableColumns]="true">
+        <p-table
+          class="post-builder-table"
+          [value]="postContentForms.controls"
+          dataKey="id"
+          [metaKeySelection]="false"
+          [scrollable]="true"
+          scrollHeight="100%"
+          [reorderableColumns]="true"
+        >
           <ng-template pTemplate="body" let-formItem let-index="rowIndex">
             <tr [pReorderableRow]="index">
               <td>
                 <app-section-block (onDelete)="onDeleteSectionBlock(index)" (onDuplicate)="onDuplicateSectionBlock(index)" id="content-{{ index }}">
                   <ng-container blockSortIcon>
-                    <img pReorderableRowHandle [src]="'assets/img/icon/drag-horizontal.svg'" pDraggable (onDragStart)="dragBlockStart()" (onDragEnd)="dragBlockEnd()" />
+                    <img
+                      pReorderableRowHandle
+                      [src]="'assets/img/icon/drag-horizontal.svg'"
+                      pDraggable
+                      (onDragStart)="dragBlockStart()"
+                      (onDragEnd)="dragBlockEnd()"
+                    />
                   </ng-container>
                   <ng-container blockContent>
                     @switch (formItem?.value?.sectionType) {

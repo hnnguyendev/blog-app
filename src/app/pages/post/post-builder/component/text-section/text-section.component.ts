@@ -1,11 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ValidationMessageComponent } from '@Shared/validation/validation-message/validation-message.component';
 import { EditorModule } from 'primeng/editor';
 
 @Component({
   selector: 'app-text-section',
   standalone: true,
-  imports: [EditorModule, ReactiveFormsModule],
+  imports: [CommonModule, EditorModule, ReactiveFormsModule, ValidationMessageComponent],
   templateUrl: './text-section.component.html',
   styleUrl: './text-section.component.scss'
 })

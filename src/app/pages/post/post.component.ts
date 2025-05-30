@@ -18,6 +18,8 @@ import { ITag } from '@Shared/interface/tag/ITag';
 import { BlogService } from '@Shared/service/blog.service';
 import { CategoryService } from '@Shared/service/category.service';
 import { TagService } from '@Shared/service/tag.service';
+import { ValidationMessageComponent } from '@Shared/validation/validation-message/validation-message.component';
+import ValidatorsCustom from '@Shared/validation/validators-custom';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -66,7 +68,8 @@ interface ExportColumn {
     EditorModule,
     MultiSelectModule,
     ReactiveFormsModule,
-    DatePipe
+    DatePipe,
+    ValidationMessageComponent
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
@@ -123,8 +126,8 @@ export class PostComponent extends BaseDestroyableDirective implements OnInit {
     super();
     this.formGroup = this.fb.group({
       id: new FormControl<string>(''),
-      title: new FormControl<string>('', [Validators.required]),
-      description: new FormControl<string>('', [Validators.required]),
+      title: new FormControl<string>('', [Validators.required, Validators.maxLength(255)]),
+      description: new FormControl<string>('', [ValidatorsCustom.editorRequired('Description is required')]),
       heroImage: new FormControl<string>('', []),
       status: new FormControl<string>('', [Validators.required]),
       category: new FormControl<string>('', [Validators.required]),
@@ -225,6 +228,7 @@ export class PostComponent extends BaseDestroyableDirective implements OnInit {
   }
 
   public editPost(post: ResponsePost): void {
+    this.submitted = false;
     this.post = null;
     this.getCategoryOptions();
     this.getTagOptions();
@@ -248,7 +252,7 @@ export class PostComponent extends BaseDestroyableDirective implements OnInit {
   public savePost(): void {
     this.submitted = true;
 
-    if (this.formGroup.invalid) {
+    if (this.formGroup?.invalid || this.postBuilderComponent?.formGroup?.invalid) {
       return;
     }
 
@@ -300,6 +304,16 @@ export class PostComponent extends BaseDestroyableDirective implements OnInit {
       message: 'Are you sure you want to delete the selected posts?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
+      acceptButtonProps: {
+        icon: 'pi pi-check',
+        severity: 'danger',
+        outlined: true
+      },
+      rejectButtonProps: {
+        icon: 'pi pi-times',
+        severity: 'secondary',
+        outlined: true
+      },
       accept: () => {
         const ids: string[] = this.selectedPosts.map((post) => post?.id);
         this.handleDeletePost(ids, true);
@@ -312,6 +326,16 @@ export class PostComponent extends BaseDestroyableDirective implements OnInit {
       message: 'Are you sure you want to delete: ' + post?.title + '?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
+      acceptButtonProps: {
+        icon: 'pi pi-check',
+        severity: 'danger',
+        outlined: true
+      },
+      rejectButtonProps: {
+        icon: 'pi pi-times',
+        severity: 'secondary',
+        outlined: true
+      },
       accept: () => {
         const ids: string[] = [post?.id];
         this.handleDeletePost(ids);

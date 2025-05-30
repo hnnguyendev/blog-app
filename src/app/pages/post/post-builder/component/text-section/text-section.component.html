@@ -1,6 +1,15 @@
 <div class="grid gap-6" [formGroup]="formItem">
   <div class="col-12 mt-4">
-    <label for="textContent" class="block font-bold mb-3">Text</label>
-    <p-editor [formControl]="control" id="textContent" [style]="{ height: '400px' }" placeholder="Enter Content" />
+    <label for="textContent" class="font-bold inline-block mb-3 mr-1">Text</label><span class="text-red-600">*</span>
+    <p-editor
+      [formControl]="control"
+      id="textContent"
+      [style]="{ height: '400px' }"
+      placeholder="Enter Content"
+      [ngClass]="{
+        'editor-invalid': submitted && control.invalid
+      }"
+    />
+    <app-validation-message [submitted]="submitted" [control]="control" />
   </div>
 </div>

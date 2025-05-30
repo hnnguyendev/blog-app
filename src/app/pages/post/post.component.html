@@ -150,11 +150,23 @@
       <div class="flex flex-col gap-6">
         <div class="grid grid-cols-12 gap-4">
           <div class="col-span-12 md:col-span-9">
-            <label for="title" class="block font-bold mb-3">Title</label>
-            <input pInputText id="title" type="text" formControlName="title" placeholder="Enter Title" fluid />
+            <label for="title" class="font-bold inline-block mb-3 mr-1">Title</label><span class="text-red-600">*</span>
+            <input
+              pInputText
+              id="title"
+              type="text"
+              formControlName="title"
+              placeholder="Enter Title"
+              [maxlength]="255"
+              fluid
+              [ngClass]="{
+                'ng-dirty ng-invalid': submitted && formGroup.get('title')?.invalid
+              }"
+            />
+            <app-validation-message [submitted]="submitted" [control]="formGroup.controls['title']" />
           </div>
           <div class="col-span-12 md:col-span-3">
-            <label for="status" class="block font-bold mb-3">Status</label>
+            <label for="status" class="font-bold inline-block mb-3 mr-1">Status</label><span class="text-red-600">*</span>
             <p-select
               id="status"
               formControlName="status"
@@ -163,18 +175,31 @@
               optionLabel="label"
               placeholder="Select One"
               class="w-full"
+              [ngClass]="{
+                'ng-dirty ng-invalid': submitted && formGroup.get('status')?.invalid
+              }"
             ></p-select>
+            <app-validation-message [submitted]="submitted" [control]="formGroup.controls['status']" />
           </div>
         </div>
 
         <div>
-          <label for="description" class="block font-bold mb-3">Description</label>
-          <p-editor id="description" [style]="{ height: '220px' }" formControlName="description" placeholder="Enter Description" />
+          <label for="description" class="font-bold inline-block mb-3 mr-1">Description</label><span class="text-red-600">*</span>
+          <p-editor
+            id="description"
+            [style]="{ height: '220px' }"
+            formControlName="description"
+            placeholder="Enter Description"
+            [ngClass]="{
+              'editor-invalid': submitted && formGroup.get('description')?.invalid
+            }"
+          />
+          <app-validation-message [submitted]="submitted" [control]="formGroup.controls['description']" />
         </div>
 
         <div class="grid grid-cols-12 gap-4">
           <div class="col-span-12 lg:col-span-3">
-            <label for="category" class="block font-bold mb-3">Category</label>
+            <label for="category" class="font-bold inline-block mb-3 mr-1">Category</label><span class="text-red-600">*</span>
             <p-select
               id="category"
               formControlName="category"
@@ -184,10 +209,14 @@
               placeholder="Select One"
               [filter]="true"
               class="w-full"
+              [ngClass]="{
+                'ng-dirty ng-invalid': submitted && formGroup.get('category')?.invalid
+              }"
             ></p-select>
+            <app-validation-message [submitted]="submitted" [control]="formGroup.controls['category']" />
           </div>
           <div class="col-span-12 lg:col-span-9">
-            <label for="tags" class="block font-bold mb-3">Tags</label>
+            <label for="tags" class="font-bold inline-block mb-3 mr-1">Tags</label><span class="text-red-600">*</span>
             <p-multiselect
               id="tags"
               formControlName="tags"
@@ -199,8 +228,12 @@
               [filter]="true"
               [maxSelectedLabels]="99"
               fluid
+              [ngClass]="{
+                'ng-dirty ng-invalid': submitted && formGroup.get('tags')?.invalid
+              }"
             >
             </p-multiselect>
+            <app-validation-message [submitted]="submitted" [control]="formGroup.controls['tags']" />
           </div>
         </div>
 
@@ -211,7 +244,7 @@
     </form>
 
     <div class="mt-5">
-      <app-post-builder #postBuilderComponent [postDetails]="post"></app-post-builder>
+      <app-post-builder #postBuilderComponent [postDetails]="post" [submitted]="submitted"></app-post-builder>
     </div>
   </ng-template>
 

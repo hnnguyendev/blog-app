@@ -1,14 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { convertSpotifyToEmbedUrl, isSpotifyLink } from '@Shared/helper/media.helper';
+import { ValidationMessageComponent } from '@Shared/validation/validation-message/validation-message.component';
 import { InputTextModule } from 'primeng/inputtext';
-import { AudioEmbedViewComponent } from '../audio-embed-view/audio-embed-view.component';
 import { TextareaModule } from 'primeng/textarea';
+import { AudioEmbedViewComponent } from '../audio-embed-view/audio-embed-view.component';
 
 @Component({
   selector: 'app-audio-section',
   standalone: true,
-  imports: [ReactiveFormsModule, InputTextModule, AudioEmbedViewComponent, TextareaModule],
+  imports: [CommonModule, ReactiveFormsModule, InputTextModule, AudioEmbedViewComponent, TextareaModule, ValidationMessageComponent],
   templateUrl: './audio-section.component.html',
   styleUrl: './audio-section.component.scss'
 })

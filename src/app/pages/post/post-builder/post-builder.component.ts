@@ -2,9 +2,11 @@ import { Component, ElementRef, Input, OnChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { POST_SECTION_TYPES } from '@Shared/constant/common.constants';
 import { EPostSectionType } from '@Shared/enum/EPostSectionType';
+import { EUrlType } from '@Shared/enum/EUrlType';
 import { IPost } from '@Shared/interface/blog/IPost';
 import { ISectionContent } from '@Shared/interface/blog/ISectionContent';
 import { ISectionFile } from '@Shared/interface/blog/ISectionFile';
+import ValidatorsCustom from '@Shared/validation/validators-custom';
 import * as _ from 'lodash';
 import { DragDropModule } from 'primeng/dragdrop';
 import { TableModule } from 'primeng/table';
@@ -19,7 +21,18 @@ import { VideoSectionComponent } from './component/video-section/video-section.c
 @Component({
   selector: 'app-post-builder',
   standalone: true,
-  imports: [DragDropModule, TextSectionComponent, ImageSectionComponent, VideoSectionComponent, AudioSectionComponent, FileSectionComponent, EmptyPostPromptComponent, SectionBlockComponent, ReactiveFormsModule, TableModule],
+  imports: [
+    DragDropModule,
+    TextSectionComponent,
+    ImageSectionComponent,
+    VideoSectionComponent,
+    AudioSectionComponent,
+    FileSectionComponent,
+    EmptyPostPromptComponent,
+    SectionBlockComponent,
+    ReactiveFormsModule,
+    TableModule
+  ],
   templateUrl: './post-builder.component.html',
   styleUrl: './post-builder.component.scss',
   host: {
@@ -28,9 +41,9 @@ import { VideoSectionComponent } from './component/video-section/video-section.c
 })
 export class PostBuilderComponent implements OnChanges {
   @Input() postDetails!: IPost | null;
+  @Input() submitted: boolean = false;
 
   public sectionTypes = POST_SECTION_TYPES;
-  public submitted: boolean = false;
   public draggedSectionType: EPostSectionType | null = null;
   public formGroup: FormGroup;
 
@@ -59,7 +72,7 @@ export class PostBuilderComponent implements OnChanges {
     if (this.postDetails) {
       if (this.postDetails?.sections?.length > 0) {
         this.postDetails?.sections
-          ?.sort((a, b) => (a.position! - b.position!))
+          ?.sort((a, b) => a.position! - b.position!)
           ?.forEach((item: ISectionContent) => {
             this.postContentForms.push(this.createFormControlBySectionType(item.sectionType, item));
           });
@@ -79,7 +92,7 @@ export class PostBuilderComponent implements OnChanges {
   and to prevent the drag event from being triggered
   when dragging over the editor */
   public dragBlockStart(): void {
-    const selectors = ['.ql-editor', '.p-inputtext', 'iframe'];
+    const selectors = ['.ql-editor', '.p-inputtext', 'p-textarea', 'iframe'];
     const editors = this.el.nativeElement.querySelectorAll(selectors.join(', '));
     editors.forEach((editor: HTMLElement) => {
       editor.classList.add('block-scroll');
@@ -87,7 +100,7 @@ export class PostBuilderComponent implements OnChanges {
   }
 
   public dragBlockEnd(): void {
-    const selectors = ['.ql-editor', '.p-inputtext', 'iframe'];
+    const selectors = ['.ql-editor', '.p-inputtext', 'p-textarea', 'iframe'];
     const editors = this.el.nativeElement.querySelectorAll(selectors.join(', '));
     editors.forEach((editor: HTMLElement) => {
       editor.classList.remove('block-scroll');
@@ -163,7 +176,7 @@ export class PostBuilderComponent implements OnChanges {
     const formControls: { [key: string]: any } = {
       [EPostSectionType.TEXT]: {
         id: new FormControl<string | null>(defaultData.id),
-        textContent: new FormControl<string>(defaultData.textContent, []),
+        textContent: new FormControl<string>(defaultData.textContent, [ValidatorsCustom.editorRequired('Text content is required')]),
         sectionType: new FormControl<EPostSectionType>(sectionType)
       },
       [EPostSectionType.IMAGE]: {
@@ -177,13 +190,16 @@ export class PostBuilderComponent implements OnChanges {
       [EPostSectionType.VIDEO]: {
         id: new FormControl<string | null>(defaultData.id),
         heading: new FormControl<string>(defaultData.heading),
-        mediaUrl: new FormControl<string>(defaultData.mediaUrl, []),
+        mediaUrl: new FormControl<string>(defaultData.mediaUrl, [
+          Validators.required,
+          ValidatorsCustom.url([EUrlType.YOUTUBE, EUrlType.VIMEO], 'YouTube OR Vimeo URL invalid')
+        ]),
         description: new FormControl<string>(defaultData.description),
         sectionType: new FormControl<EPostSectionType>(sectionType)
       },
       [EPostSectionType.AUDIO]: {
         id: new FormControl<string | null>(defaultData.id),
-        mediaUrl: new FormControl<string>(defaultData.mediaUrl, []),
+        mediaUrl: new FormControl<string>(defaultData.mediaUrl, [Validators.required, ValidatorsCustom.url([EUrlType.SPOTIFY], 'Spotify URL invalid')]),
         description: new FormControl<string>(defaultData.description),
         sectionType: new FormControl<EPostSectionType>(sectionType)
       },
