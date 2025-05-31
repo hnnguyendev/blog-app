@@ -119,7 +119,7 @@
       </td>
       <td style="min-width: 12rem">{{ post.title }}</td>
       <td>
-        <img [src]="post.heroImage || 'assets/img/developers.jpg'" [alt]="post.title" style="width: 64px" class="rounded" />
+        <img [src]="post.heroImage || 'assets/img/placeholder.svg'" [alt]="post.title" style="width: 64px" class="rounded" />
       </td>
       <td>{{ post.category }}</td>
       <td>{{ post.authorName }}</td>
@@ -237,9 +237,18 @@
           </div>
         </div>
 
-        <!--        <div>-->
-        <!--          <label for="heroImage" class="block font-bold mb-3">Hero Image</label>-->
-        <!--        </div>-->
+        <div>
+          <label for="heroImage" class="font-bold inline-block mb-3 mr-1">Hero Image</label><span class="text-red-600">*</span>
+          <app-file-upload
+            id="heroImage"
+            [fileUrl]="formGroup.get('heroImage')?.value"
+            formControlName="heroImage"
+            [formGroup]="formGroup"
+            [submitted]="submitted"
+            (onUploadFileSuccess)="onUploadFile($event)"
+          ></app-file-upload>
+          <app-validation-message [submitted]="submitted" [control]="formGroup.controls['heroImage']" />
+        </div>
       </div>
     </form>
 

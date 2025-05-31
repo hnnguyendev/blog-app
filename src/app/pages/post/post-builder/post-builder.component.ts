@@ -182,7 +182,7 @@ export class PostBuilderComponent implements OnChanges {
       [EPostSectionType.IMAGE]: {
         id: new FormControl<string | null>(defaultData.id),
         heading: new FormControl<string>(defaultData.heading),
-        mediaUrl: new FormControl<string>(defaultData.mediaUrl, []),
+        mediaUrl: new FormControl<string>(defaultData.mediaUrl, [Validators.required]),
         description: new FormControl<string>(defaultData.description),
         photoCredit: new FormControl<string>(defaultData.photoCredit),
         sectionType: new FormControl<EPostSectionType>(sectionType)

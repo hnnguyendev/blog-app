@@ -9,12 +9,14 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AvatarModule } from 'primeng/avatar';
 import { AudioViewComponent } from './audio-view/audio-view.component';
 import { StatementComponent } from './statement/statement.component';
+import { SubscribeNewsletterComponent } from './subscribe-newsletter/subscribe-newsletter.component';
 import { TextViewComponent } from './text-view/text-view.component';
 import { VideoViewComponent } from './video-view/video-view.component';
+import { PAGE_TITLE } from '@Shared/constant/common.constants';
 
 @Component({
   selector: 'app-post-details',
-  imports: [StatementComponent, TextViewComponent, VideoViewComponent, AudioViewComponent, AvatarModule, DatePipe],
+  imports: [StatementComponent, TextViewComponent, VideoViewComponent, AudioViewComponent, AvatarModule, DatePipe, SubscribeNewsletterComponent],
   templateUrl: './post-details.component.html',
   styleUrl: './post-details.component.scss'
 })
@@ -43,7 +45,7 @@ export class PostDetailsComponent implements OnInit {
     this.blogService.getBlogPostDetails(slug).subscribe({
       next: (res: IResponseBlogPostDetails) => {
         this.post = res;
-        this.titleService.setTitle(this.post ? this.post.title : 'Post Details');
+        this.titleService.setTitle(this.post ? this.post.title : PAGE_TITLE.BLOG);
         this.spinner.hide();
       },
       error: () => {

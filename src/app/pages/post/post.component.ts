@@ -2,6 +2,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FileUploadComponent } from '@Shared/component/file-upload/file-upload.component';
 import { PAGINATION_DEFAULT, POST_STATUSES } from '@Shared/constant/common.constants';
 import { BaseDestroyableDirective } from '@Shared/directive/base-destroyable';
 import { EPostStatus } from '@Shared/enum/EPostStatus';
@@ -69,7 +70,8 @@ interface ExportColumn {
     MultiSelectModule,
     ReactiveFormsModule,
     DatePipe,
-    ValidationMessageComponent
+    ValidationMessageComponent,
+    FileUploadComponent
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
@@ -128,7 +130,7 @@ export class PostComponent extends BaseDestroyableDirective implements OnInit {
       id: new FormControl<string>(''),
       title: new FormControl<string>('', [Validators.required, Validators.maxLength(255)]),
       description: new FormControl<string>('', [ValidatorsCustom.editorRequired('Description is required')]),
-      heroImage: new FormControl<string>('', []),
+      heroImage: new FormControl<string>('', [Validators.required]),
       status: new FormControl<string>('', [Validators.required]),
       category: new FormControl<string>('', [Validators.required]),
       tags: new FormControl<string[]>([], [Validators.required]),
@@ -402,6 +404,12 @@ export class PostComponent extends BaseDestroyableDirective implements OnInit {
       summary,
       detail,
       life: 3000
+    });
+  }
+
+  public onUploadFile(imageUrl: string) {
+    this.formGroup.patchValue({
+      heroImage: imageUrl
     });
   }
 }

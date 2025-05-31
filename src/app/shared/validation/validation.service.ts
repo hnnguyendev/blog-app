@@ -5,7 +5,7 @@ export class ValidationService {
   static getValidatorErrorMessage(validatorName: string): string {
     const config = {
       required: '{field} is required',
-      email: `Please enter a valid email address.`,
+      email: `Enter a valid email address to continue.`,
       min: '{field} should not be less than {value}',
       max: '{field} should not be more than {value}',
       maxlength: `{field} cannot be longer than {maxlength} characters.`,

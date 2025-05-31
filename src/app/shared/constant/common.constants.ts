@@ -1,5 +1,9 @@
 import { EPostSectionType } from '@Shared/enum/EPostSectionType';
 
+export const PAGE_TITLE = {
+  BLOG: 'Blog | hnnguyen.dev'
+}
+
 export const POST_SECTION_TYPES = [
   { label: 'Text', value: EPostSectionType.TEXT },
   { label: 'Image', value: EPostSectionType.IMAGE },
@@ -24,4 +28,15 @@ export const PAGINATION_DEFAULT = {
   ROWS_12: 12,
   TOTAL_RECORDS: 0,
   ROWS_PER_PAGE_OPTIONS: [5, 10, 15, 25, 50, 100]
+};
+
+export const FILE_SIZE = {
+  _1MB: '1048576',
+  _5MB: '5242880',
+  _10MB: '10485760',
+  _15MB: '15728640'
+};
+
+export const ACCEPT_FILE = {
+  IMAGE: '.jpg,.jpeg,.png,.heif,.heic,.gif,.svg,.bmp,.webp,.tif,.tiff,.ico'
 };

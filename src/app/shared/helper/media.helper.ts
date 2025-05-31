@@ -61,32 +61,3 @@ export const isSpotifyLink = (url: string): boolean => {
   const spotifyRegex = /https:\/\/open\.spotify\.com\/(track|album|playlist|artist|episode)\/(.+)/;
   return spotifyRegex.test(url);
 };
-
-export const isGoogleMeetLink = (url: string): boolean => {
-  const googleMeetRegex = /https:\/\/meet\.google\.com\/[a-zA-Z0-9-]{10,12}/;
-  return googleMeetRegex.test(url);
-};
-
-export const isMicrosoftTeamsLink = (url: string): boolean => {
-  const microsoftRegex = /^https?:\/\/(www\.)?(teams\.microsoft\.com|teams\.live\.com)\/[^\s]+$/;
-  return microsoftRegex.test(url);
-};
-
-export const isZoomLink = (url: string): boolean => {
-  const zoomRegex = /https:\/\/([\w-]+\.)?zoom\.us\/[\w\/-]+(\?pwd=\w+)?(#[\w=]+)?/;
-  return zoomRegex.test(url);
-};
-
-export const isICalLink = (url: string): boolean => {
-  const iCalLinkRegex = /^(https?:\/\/)?([a-zA-Z0-9.-]+)(\/[^\s]*)?\/?([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})?\/?([a-zA-Z0-9-]+\.ics)$/;
-  return iCalLinkRegex.test(url);
-};
-
-export const isEventBriteLink = (url: string): boolean => {
-  const eventBriteLink = /^https:\/\/www\.eventbrite\.com\/(e\/[a-zA-Z0-9-]+-tickets-(\d+)(\?.*)?|o\/[\w-]+(\d+)?|o\/(\d+))$/;
-  return eventBriteLink.test(url);
-};
-
-export const escapeCssUrl = (url: string): string => {
-  return url.replace(/[\\"'()]/g, '\\$&'); // Escape \ " ' ( )
-};

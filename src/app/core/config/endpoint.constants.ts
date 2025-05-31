@@ -24,6 +24,9 @@ export const ENDPOINT = {
   TAG: {
     GET_TAG_OPTIONS: '/api/tags/options',
     ADD_TAG: '/api/tags',
+  },
+  FILE: {
+    UPLOAD_IMAGE: '/api/files/image'
   }
 };
 

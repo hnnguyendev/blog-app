@@ -1,0 +1,20 @@
+<form (ngSubmit)="subscribe()" [formGroup]="subscribeForm">
+  <div class="flex flex-col py-5 px-6 rounded-[10px]" style="border: 1px solid var(--surface-border)">
+    <h4>Subscribe to my Newsletter</h4>
+    <input
+      pInputText
+      type="text"
+      pSize="large"
+      placeholder="Enter your email"
+      id="email"
+      name="email"
+      formControlName="email"
+      [ngClass]="{
+        'ng-dirty ng-invalid': submitted && subscribeForm.get('email')?.invalid
+      }"
+      fluid
+    />
+    <app-validation-message [submitted]="submitted" [control]="subscribeForm.controls['email']" />
+    <p-button type="submit" label="SUBSCRIBE" icon="pi pi-arrow-right" iconPos="right" size="large" class="mt-5" fluid />
+  </div>
+</form>
