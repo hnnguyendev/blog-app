@@ -1,7 +1,9 @@
 :root {
-    --surface-ground: var(--p-surface-100);
-    --code-background: var(--p-surface-900);
-    --code-color: var(--p-surface-200);
-    --section-block-background: var(--surface-50);
-    --section-block-header-background: var(--surface-100);
+  --surface-ground: var(--p-surface-100);
+  --code-background: var(--p-surface-900);
+  --code-color: var(--p-surface-200);
+  --section-block-background: var(--surface-50);
+  --section-block-header-background: var(--surface-100);
+  --statement-background: linear-gradient(0deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
+    radial-gradient(77.36% 256.97% at 77.36% 57.52%, #efe1af 0%, #c3dcfa 100%);
 }

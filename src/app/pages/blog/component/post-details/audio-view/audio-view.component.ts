@@ -5,6 +5,7 @@ import { ISectionContent } from '@Shared/interface/blog/ISectionContent';
 
 @Component({
   selector: 'app-audio-view',
+  standalone: true,
   imports: [AudioEmbedViewComponent],
   templateUrl: './audio-view.component.html',
   styleUrl: './audio-view.component.scss'

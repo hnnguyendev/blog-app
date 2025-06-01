@@ -38,6 +38,7 @@ declare type SurfacesType = {
 
 @Component({
   selector: 'app-topbar-widget',
+  standalone: true,
   imports: [RouterModule, StyleClassModule, ButtonModule, RippleModule, CommonModule],
   templateUrl: './topbar-widget.component.html',
   styleUrl: './topbar-widget.component.scss'

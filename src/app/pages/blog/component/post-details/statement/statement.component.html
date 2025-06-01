@@ -1,10 +1,13 @@
 <div class="grid grid-cols-12 gap-4 justify-center">
-  <div class="col-span-12 p-2 md:p-5" style="border-radius: 20px; background: linear-gradient(0deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), radial-gradient(77.36% 256.97% at 77.36% 57.52%, #efe1af 0%, #c3dcfa 100%)">
+  <div class="col-span-12 p-2 md:p-5" style="border-radius: 20px; background: var(--statement-background)">
     <div class="flex flex-col justify-center items-center text-center px-4 py-4 md:py-0">
-      <div class="text-gray-900 mb-2 text-3xl font-semibold">Statement here</div>
-      <span class="text-gray-600 text-2xl">Comming soon</span>
+      <div class="text-gray-900 mb-2 text-3xl font-semibold">I'm truly grateful you're here.</div>
+      <span class="text-gray-600 text-2xl"
+        >With so many paths you could’ve taken, you chose to stop by mine. That means more than you know. Thank you for your time, your trust, and your
+        presence.</span
+      >
       <p class="text-gray-900 sm:line-height-2 md:line-height-4 text-2xl mt-5">
-        “Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.”
+        {{ currentDateTime }}
       </p>
     </div>
   </div>

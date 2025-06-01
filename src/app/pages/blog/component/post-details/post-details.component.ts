@@ -2,21 +2,32 @@ import { DatePipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { PAGE_TITLE } from '@Shared/constant/common.constants';
 import { EPostSectionType } from '@Shared/enum/EPostSectionType';
 import { IResponseBlogPostDetails } from '@Shared/interface/blog/IResponseBlogPostDetails';
 import { BlogService } from '@Shared/service/blog.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AvatarModule } from 'primeng/avatar';
 import { AudioViewComponent } from './audio-view/audio-view.component';
+import { ImageViewComponent } from './image-view/image-view.component';
 import { StatementComponent } from './statement/statement.component';
 import { SubscribeNewsletterComponent } from './subscribe-newsletter/subscribe-newsletter.component';
 import { TextViewComponent } from './text-view/text-view.component';
 import { VideoViewComponent } from './video-view/video-view.component';
-import { PAGE_TITLE } from '@Shared/constant/common.constants';
 
 @Component({
   selector: 'app-post-details',
-  imports: [StatementComponent, TextViewComponent, VideoViewComponent, AudioViewComponent, AvatarModule, DatePipe, SubscribeNewsletterComponent],
+  standalone: true,
+  imports: [
+    StatementComponent,
+    TextViewComponent,
+    VideoViewComponent,
+    AudioViewComponent,
+    AvatarModule,
+    DatePipe,
+    SubscribeNewsletterComponent,
+    ImageViewComponent
+  ],
   templateUrl: './post-details.component.html',
   styleUrl: './post-details.component.scss'
 })

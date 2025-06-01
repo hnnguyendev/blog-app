@@ -7,6 +7,7 @@ import { AvatarModule } from 'primeng/avatar';
 
 @Component({
   selector: 'app-article-card',
+  standalone: true,
   imports: [AvatarModule, HtmlToTextPipe, DatePipe],
   templateUrl: './article-card.component.html',
   styleUrl: './article-card.component.scss'

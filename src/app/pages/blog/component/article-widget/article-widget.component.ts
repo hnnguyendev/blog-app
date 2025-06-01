@@ -11,6 +11,7 @@ import { ArticleCardComponent } from './article-card/article-card.component';
 
 @Component({
   selector: 'app-article-widget',
+  standalone: true,
   imports: [ArticleCardComponent, PaginatorModule],
   templateUrl: './article-widget.component.html',
   styleUrl: './article-widget.component.scss'

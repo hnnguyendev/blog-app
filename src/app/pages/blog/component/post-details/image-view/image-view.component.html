@@ -1,0 +1,8 @@
+<div>
+  <h4>{{ sectionContent.heading }}</h4>
+  <img [src]="sectionContent.mediaUrl" [alt]="sectionContent.heading" />
+  @if (sectionContent.photoCredit) {
+    <span class="text-sm text-muted-color italic"> Photo by {{ sectionContent.photoCredit }}</span>
+  }
+  <p class="mt-2">{{ sectionContent.description }}</p>
+</div>

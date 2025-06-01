@@ -5,6 +5,7 @@ import { ISectionContent } from '@Shared/interface/blog/ISectionContent';
 
 @Component({
   selector: 'app-video-view',
+  standalone: true,
   imports: [VideoEmbedViewComponent],
   templateUrl: './video-view.component.html',
   styleUrl: './video-view.component.scss'
