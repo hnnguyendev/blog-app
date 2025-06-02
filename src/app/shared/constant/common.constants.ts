@@ -34,7 +34,8 @@ export const FILE_SIZE = {
   _1MB: '1048576',
   _5MB: '5242880',
   _10MB: '10485760',
-  _15MB: '15728640'
+  _15MB: '15728640',
+  _25MB: '26214400'
 };
 
 export const ACCEPT_FILE = {

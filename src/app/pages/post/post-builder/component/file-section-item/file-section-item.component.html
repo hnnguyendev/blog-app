@@ -1,0 +1,38 @@
+<ng-container [formGroup]="formItem">
+  <div class="col-span-12 mt-4">
+    <label for="name" class="block font-bold mb-3">Name</label>
+    <input pInputText [type]="'text'" [formControl]="controls['name']" [placeholder]="'Enter Name'" id="name" class="w-full" />
+    <app-validation-message [submitted]="submitted" [control]="controls['name']" />
+  </div>
+  <div class="col-span-12 mt-4">
+    <app-file-upload
+      id="mediaUrl"
+      [fileUrl]="formItem.value?.mediaUrl"
+      formControlName="mediaUrl"
+      [formGroup]="formItem"
+      [submitted]="submitted"
+      [uploadApi]="uploadFileApi"
+      [acceptFile]="''"
+      [maxFileSize]="maxFileSize"
+      [imageUpload]="false"
+      (onUploadFileSuccess)="onUploadFile($event)"
+      (onDeleteFile)="onDeleteFile()"
+    ></app-file-upload>
+    <app-validation-message [submitted]="submitted" [control]="controls['mediaUrl']" [fieldName]="'File'" />
+  </div>
+
+  <div class="col-span-12 mt-4">
+    <label for="description" class="block font-bold mb-3">Short Description</label>
+    <textarea
+      pTextarea
+      id="description"
+      [formControl]="controls['description']"
+      placeholder="Enter Short Description"
+      rows="4"
+      cols="20"
+      autoResize="true"
+      fluid
+    ></textarea>
+    <app-validation-message [submitted]="submitted" [control]="controls['description']" [fieldName]="'Description'" />
+  </div>
+</ng-container>

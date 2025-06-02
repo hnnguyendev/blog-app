@@ -4,6 +4,7 @@ import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ENDPOINT } from '@Core/config/endpoint.constants';
 import { environment } from '@Environments/environment';
 import { ACCEPT_FILE, FILE_SIZE } from '@Shared/constant/common.constants';
+import { getFileNameWithExtension } from '@Shared/helper/file.helper';
 import * as _ from 'lodash';
 import { MessageService } from 'primeng/api';
 import { BadgeModule } from 'primeng/badge';
@@ -34,9 +35,10 @@ export class FileUploadComponent implements OnInit {
   @Input() formControlName!: string;
   @Input() submitted!: boolean;
   @Input() fileUrl?: string;
-  @Input() uploadUrl: string = `${environment.BASE_URL}${ENDPOINT.FILE.UPLOAD_IMAGE}`;
+  @Input() uploadApi: string = `${environment.BASE_URL}${ENDPOINT.FILE.UPLOAD_IMAGE}`;
   @Input() acceptFile: string = ACCEPT_FILE.IMAGE;
   @Input() maxFileSize: string = FILE_SIZE._5MB;
+  @Input() imageUpload: boolean = true;
 
   @Output() onUploadFileSuccess = new EventEmitter<string>();
   @Output() onDeleteFile = new EventEmitter<void>();
@@ -139,6 +141,7 @@ export class FileUploadComponent implements OnInit {
       [this.formControlName]: ''
     });
     this.files = [];
+    this.onDeleteFile.emit();
   }
 
   public onUploadError(event: any): void {
@@ -160,5 +163,9 @@ export class FileUploadComponent implements OnInit {
       .split(',')
       .map((ext) => ext.trim().replace('.', '').toUpperCase())
       .join(', ');
+  }
+
+  public getFileName(path: string): string {
+    return getFileNameWithExtension(path);
   }
 }

@@ -14,6 +14,7 @@ import { StatementComponent } from './statement/statement.component';
 import { SubscribeNewsletterComponent } from './subscribe-newsletter/subscribe-newsletter.component';
 import { TextViewComponent } from './text-view/text-view.component';
 import { VideoViewComponent } from './video-view/video-view.component';
+import { FileViewComponent } from './file-view/file-view.component';
 
 @Component({
   selector: 'app-post-details',
@@ -26,7 +27,8 @@ import { VideoViewComponent } from './video-view/video-view.component';
     AvatarModule,
     DatePipe,
     SubscribeNewsletterComponent,
-    ImageViewComponent
+    ImageViewComponent,
+    FileViewComponent
   ],
   templateUrl: './post-details.component.html',
   styleUrl: './post-details.component.scss'

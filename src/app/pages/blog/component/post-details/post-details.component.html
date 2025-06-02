@@ -41,7 +41,9 @@
               </div>
             }
             @case (EPostSectionType.FILE) {
-              <div></div>
+              <div>
+                <app-file-view [sectionContent]="section" />
+              </div>
             }
           }
         }

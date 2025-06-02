@@ -26,7 +26,8 @@ export const ENDPOINT = {
     ADD_TAG: '/api/tags',
   },
   FILE: {
-    UPLOAD_IMAGE: '/api/files/image'
+    UPLOAD_IMAGE: '/api/files/image',
+    UPLOAD_FILE: '/api/files/file'
   }
 };
 

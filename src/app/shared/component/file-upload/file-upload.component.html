@@ -2,7 +2,7 @@
   <p-fileupload
     #fileUpload
     name="myfile"
-    [url]="uploadUrl"
+    [url]="uploadApi"
     [multiple]="false"
     [fileLimit]="1"
     [accept]="acceptFile"
@@ -27,14 +27,25 @@
             severity="success"
             [disabled]="!files || files.length === 0 || uploadProgress"
           />
-          <p-button
-            (onClick)="clearCallback()"
-            icon="pi pi-times"
-            [rounded]="true"
-            [outlined]="true"
-            severity="danger"
-            [disabled]="!files || files.length === 0 || uploadProgress"
-          />
+          @if (imageUpload) {
+            <p-button
+              (onClick)="clearCallback()"
+              icon="pi pi-times"
+              [rounded]="true"
+              [outlined]="true"
+              severity="danger"
+              [disabled]="!files || files.length === 0 || uploadProgress"
+            />
+          } @else {
+            <p-button
+              icon="pi pi-times"
+              (onClick)="onRemoveUploadedFile()"
+              [outlined]="true"
+              [rounded]="true"
+              severity="danger"
+              [disabled]="uploadProgress || !hasFile"
+            />
+          }
         </div>
 
         @if (uploadProgress) {
@@ -54,7 +65,11 @@
           <div class="flex flex-wrap gap-4 justify-center">
             <div *ngFor="let file of files; let i = index" class="p-8 rounded-border flex flex-col border border-surface items-center gap-4">
               <div>
-                <p-image [alt]="file.name" [src]="file.objectURL" [width]="'120'" [loading]="'lazy'" [preview]="true" />
+                @if (imageUpload) {
+                  <p-image [alt]="file.name" [src]="file.objectURL" [width]="'120'" [loading]="'lazy'" [preview]="true" />
+                } @else {
+                  <i class="pi pi-file !text-7xl"></i>
+                }
               </div>
               <span class="font-semibold text-ellipsis max-w-60 whitespace-nowrap overflow-hidden">{{ file.name }}</span>
               <div>{{ formatSize(file.size) }}</div>
@@ -74,7 +89,11 @@
           <div class="flex flex-wrap gap-4 justify-center">
             <div *ngFor="let file of uploadedFiles; let i = index" class="card m-0 px-12 flex flex-col border border-surface items-center gap-4">
               <div>
-                <p-image [alt]="file.name" [src]="file.objectURL" [width]="'120'" [loading]="'lazy'" [preview]="true" />
+                @if (imageUpload) {
+                  <p-image [alt]="file.name" [src]="file.objectURL" [width]="'120'" [loading]="'lazy'" [preview]="true" />
+                } @else {
+                  <i class="pi pi-file !text-7xl"></i>
+                }
               </div>
               <span class="font-semibold text-ellipsis max-w-60 whitespace-nowrap overflow-hidden">{{ file.name }}</span>
               <div>{{ formatSize(file.size) }}</div>
@@ -91,8 +110,13 @@
         </div>
         @if (files?.length === 0 && uploadedFiles?.length === 0 && hasFile) {
           <div class="flex flex-wrap gap-4 pb-4 justify-center">
-            <div>
-              <p-image [alt]="'Hero Image'" [src]="fileUrl" [width]="'300'" [loading]="'lazy'" [preview]="true" />
+            <div class="flex flex-col items-center">
+              @if (imageUpload) {
+                <p-image [alt]="'Hero Image'" [src]="fileUrl" [width]="'300'" [loading]="'lazy'" [preview]="true" />
+              } @else {
+                <i class="pi pi-file !text-7xl mb-4"></i>
+                <span class="font-semibold text-ellipsis max-w-60 whitespace-nowrap overflow-hidden mb-4">{{ getFileName(fileUrl!) }}</span>
+              }
             </div>
           </div>
         }

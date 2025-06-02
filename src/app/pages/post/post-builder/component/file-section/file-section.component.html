@@ -1,15 +1,9 @@
-<!-- <div class="grid" [formGroup]="formItem">
-    <ng-container formArrayName="sectionFiles">
-        @for (fileFormControl of sectionFiles.controls; track fileFormControl) {
-            <div class="col-12 md:col-6 lg:col-6 xl:col-3">
-                <app-lesson-content-file-item
-                    [formGroup]="formItem"
-                    [formItem]="fileFormControl"
-                    [index]="$index"
-                    [submitted]="submitted"
-                />
-            </div>
-        }
-    </ng-container>
-</div> -->
-File section TBD
+<div class="grid grid-cols-12 gap-6" [formGroup]="formItem">
+  <ng-container formArrayName="sectionFiles">
+    @for (fileFormControl of sectionFiles.controls; track fileFormControl) {
+      <div class="col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-6 xl:col-span-3">
+        <app-file-section-item [formGroup]="formItem" [formItem]="fileFormControl" [index]="$index" [submitted]="submitted" />
+      </div>
+    }
+  </ng-container>
+</div>

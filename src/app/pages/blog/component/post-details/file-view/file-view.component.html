@@ -1,0 +1,7 @@
+<div class="grid grid-cols-12 gap-5">
+  @for (file of sectionFiles; track file) {
+    <div class="col-span-12 xs:col-span-6 md:col-span-3 lg:col-span-3 xl:col-span-3 text-center">
+      <app-file-view-item [file]="file" [loading]="loadingMap[file!.mediaUrl] || false" (onDownLoadFile)="downLoadFile(file!)" />
+    </div>
+  }
+</div>

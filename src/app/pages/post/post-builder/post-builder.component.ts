@@ -205,7 +205,7 @@ export class PostBuilderComponent implements OnChanges {
       },
       [EPostSectionType.FILE]: {
         id: new FormControl<string | null>(defaultData.id),
-        sectionFiles: this.createFileFormControls(defaultData.sectionFiles),
+        sectionFiles: this.createSectionFilesFormArray(defaultData.sectionFiles),
         sectionType: new FormControl<EPostSectionType>(sectionType)
       }
     };
@@ -213,26 +213,23 @@ export class PostBuilderComponent implements OnChanges {
     return this.fb.group(formControls[sectionType] as { [key: string]: AbstractControl });
   }
 
-  private createFormControl(value: string | null | undefined, enabled: boolean, required: boolean = false, requiredMessage?: string): FormControl {
-    const control = new FormControl({ value: value || null, disabled: !enabled });
-
-    if (required) {
-      control.setValidators(Validators.required);
-    }
+  private createFormControl(value: string | undefined, enabled: boolean, required: boolean = false): FormControl {
+    const control = new FormControl({ value: value ?? null, disabled: !enabled }, required ? Validators.required : null);
 
     return control;
   }
 
-  private createFileFormControls(files: ISectionFile[] | null[]): FormArray {
-    const hasFileInList = files.some((item) => !_.isNil(item?.mediaUrl));
+  private createSectionFilesFormArray(files: (ISectionFile | null)[]): FormArray {
+    const hasUploadedFiles = files.some((file) => !_.isNil(file?.mediaUrl));
+
     const fileFormGroups = files.slice(0, 4).map((file, index) => {
-      const isFileUploaded = !_.isNil(file?.mediaUrl);
-      const isRequired = isFileUploaded || (!hasFileInList && index === 0);
+      const fileUploaded = !_.isNil(file?.mediaUrl);
+      const isRequired = fileUploaded || (!hasUploadedFiles && index === 0);
 
       return this.fb.group({
-        name: this.createFormControl(file?.name, isFileUploaded, isRequired, 'Name required'),
-        mediaUrl: this.createFormControl(file?.mediaUrl, true, isRequired, 'File required'),
-        description: this.createFormControl(file?.description, isFileUploaded),
+        name: this.createFormControl(file?.name, fileUploaded, isRequired),
+        mediaUrl: this.createFormControl(file?.mediaUrl, true, isRequired),
+        description: this.createFormControl(file?.description, fileUploaded),
         position: [index + 1]
       });
     });
