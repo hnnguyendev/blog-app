@@ -42,7 +42,7 @@ export class LoginComponent implements AfterViewInit {
   constructor() {
     this.loginForm = this.fb.nonNullable.group({
       username: new FormControl<string>('', [Validators.required, Validators.maxLength(50)]),
-      password: new FormControl<string>('', [Validators.required, Validators.minLength(5)]),
+      password: new FormControl<string>('', [Validators.required, Validators.minLength(4)]),
       rememberMe: new FormControl<boolean>(false, [Validators.required])
     });
   }
@@ -63,7 +63,7 @@ export class LoginComponent implements AfterViewInit {
         this.authenticationError.set(false);
         if (!this.router.getCurrentNavigation()) {
           // There were no routing during login (eg from navigationToStoredUrl)
-          this.router.navigate(['/admin/dashboard']);
+          this.router.navigate(['/']);
         }
       },
       error: () => {

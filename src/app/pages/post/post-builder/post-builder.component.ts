@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { POST_SECTION_TYPES } from '@Shared/constant/common.constants';
 import { EPostSectionType } from '@Shared/enum/EPostSectionType';
@@ -68,8 +68,8 @@ export class PostBuilderComponent implements OnChanges {
     });
   }
 
-  ngOnChanges(): void {
-    if (this.postDetails) {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['postDetails'] && this.postDetails) {
       if (this.postDetails?.sections?.length > 0) {
         this.postDetails?.sections
           ?.sort((a, b) => a.position! - b.position!)

@@ -23,3 +23,29 @@
     display: none;
   }
 }
+
+:host ::ng-deep {
+  .avatar-menu {
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--surface-hover);
+    }
+  }
+
+  .menu-custom {
+    @media (min-width: 1545px) {
+      .p-menu-overlay {
+        left: 1293px !important;
+      }
+    }
+
+    @media (max-width: 1023px) {
+      .p-menu-overlay {
+        top: 258px !important;
+      }
+    }
+  }
+}

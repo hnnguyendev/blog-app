@@ -1,12 +1,18 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, computed, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { AccountService } from '@Core/auth/account.service';
 import { LayoutService } from '@Layout/service/layout.service';
+import { LoginService } from '@Pages/auth/login/login.service';
 import { $t } from '@primeng/themes';
 import Aura from '@primeng/themes/aura';
 import Lara from '@primeng/themes/lara';
 import Nora from '@primeng/themes/nora';
+import { RolePipe } from '@Shared/pipe/role.pipe';
+import { MenuItem } from 'primeng/api';
+import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
+import { MenuModule } from 'primeng/menu';
 import { RippleModule } from 'primeng/ripple';
 import { StyleClassModule } from 'primeng/styleclass';
 
@@ -39,14 +45,22 @@ declare type SurfacesType = {
 @Component({
   selector: 'app-topbar-widget',
   standalone: true,
-  imports: [RouterModule, StyleClassModule, ButtonModule, RippleModule, CommonModule],
+  imports: [RouterModule, StyleClassModule, ButtonModule, RippleModule, CommonModule, AvatarModule, RolePipe, MenuModule, RippleModule],
   templateUrl: './topbar-widget.component.html',
   styleUrl: './topbar-widget.component.scss'
 })
 export class TopbarWidgetComponent implements OnInit {
   private platformId = inject(PLATFORM_ID);
+  public account = inject(AccountService).trackCurrentAccount();
+  public menuItems: MenuItem[] | undefined;
+
+  public get primaryRole(): string {
+    return this.account()?.authorities[0] || '';
+  }
+
   public readonly layoutService = inject(LayoutService);
   public readonly router = inject(Router);
+  public readonly loginService = inject(LoginService);
 
   public selectedPrimaryColor = computed(() => {
     return this.layoutService.layoutConfig().primary;
@@ -54,7 +68,24 @@ export class TopbarWidgetComponent implements OnInit {
 
   public primaryColors = computed<SurfacesType[]>(() => {
     const presetPalette = presets[this.layoutService.layoutConfig().preset as KeyOfType<typeof presets>].primitive;
-    const colors = ['emerald', 'green', 'lime', 'orange', 'amber', 'yellow', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose'];
+    const colors = [
+      'emerald',
+      'green',
+      'lime',
+      'orange',
+      'amber',
+      'yellow',
+      'teal',
+      'cyan',
+      'sky',
+      'blue',
+      'indigo',
+      'violet',
+      'purple',
+      'fuchsia',
+      'pink',
+      'rose'
+    ];
     const palettes: SurfacesType[] = [{ name: 'noir', palette: {} }];
 
     colors.forEach((color) => {
@@ -71,6 +102,31 @@ export class TopbarWidgetComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       this.onPresetChange(this.layoutService.layoutConfig().preset);
     }
+    this.loadProfileMenuData();
+  }
+
+  private loadProfileMenuData(): void {
+    this.menuItems = [
+      {
+        label: 'Profile',
+        items: [
+          {
+            label: 'Settings',
+            icon: 'pi pi-cog'
+          },
+          {
+            label: 'Logout',
+            icon: 'pi pi-sign-out',
+            command: () => {
+              this.logout();
+            }
+          }
+        ]
+      },
+      {
+        separator: true
+      }
+    ];
   }
 
   public getPresetExt() {
@@ -210,5 +266,10 @@ export class TopbarWidgetComponent implements OnInit {
 
   public toggleDarkMode() {
     this.layoutService.layoutConfig.update((state) => ({ ...state, darkTheme: !state.darkTheme }));
+  }
+
+  public logout(): void {
+    this.loginService.logout();
+    this.router.navigate(['/']);
   }
 }

@@ -18,6 +18,6 @@ export class ArticleCardComponent {
   private readonly router = inject(Router);
 
   public navigateToDetail(): void {
-    this.router.navigate(['/blog', this.post.slug]);
+    this.router.navigate(['/posts', this.post.slug]);
   }
 }
