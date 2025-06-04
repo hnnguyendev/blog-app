@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AccountService } from '@Core/auth/account.service';
 import { FloatingConfiguratorComponent } from '@Layout/component/floating-configurator/floating-configurator.component';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
@@ -11,4 +12,10 @@ import { RippleModule } from 'primeng/ripple';
   templateUrl: './access.component.html',
   styleUrl: './access.component.scss'
 })
-export class AccessComponent {}
+export class AccessComponent {
+  private readonly accountService = inject(AccountService);
+
+  public redirectByRole(): void {
+    this.accountService.redirectByRole();
+  }
+}

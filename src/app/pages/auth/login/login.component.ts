@@ -10,6 +10,8 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { LoginService } from './login.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { AccountService } from '@Core/auth/account.service';
 
 @Component({
   selector: 'app-login',
@@ -38,6 +40,8 @@ export class LoginComponent implements AfterViewInit {
   private readonly router = inject(Router);
   private readonly messageService = inject(MessageService);
   private readonly fb = inject(FormBuilder);
+  private readonly spinner = inject(NgxSpinnerService);
+  private readonly accountService = inject(AccountService);
 
   constructor() {
     this.loginForm = this.fb.nonNullable.group({
@@ -58,15 +62,18 @@ export class LoginComponent implements AfterViewInit {
       return;
     }
 
+    this.spinner.show();
     this.loginService.login(this.loginForm.getRawValue()).subscribe({
       next: () => {
+        this.spinner.hide();
         this.authenticationError.set(false);
         if (!this.router.getCurrentNavigation()) {
           // There were no routing during login (eg from navigationToStoredUrl)
-          this.router.navigate(['/']);
+          this.accountService.redirectByRole();
         }
       },
       error: () => {
+        this.spinner.hide();
         this.authenticationError.set(true);
         this.messageService.add({
           key: 'global-toast',

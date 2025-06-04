@@ -7,6 +7,7 @@ import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { ENDPOINT, getEndpoint } from '@Core/config/endpoint.constants';
 import { Account } from './account.model';
 import { StateStorageService } from './state-storage.service';
+import { Authority } from '@Core/config/authority.constants';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -79,5 +80,10 @@ export class AccountService {
       this.stateStorageService.clearUrl();
       this.router.navigateByUrl(previousUrl);
     }
+  }
+
+  public redirectByRole(): void {
+    const isAdmin = this.hasAnyAuthority([Authority.ADMIN]);
+    this.router.navigateByUrl(isAdmin ? '/admin/dashboard' : '/');
   }
 }

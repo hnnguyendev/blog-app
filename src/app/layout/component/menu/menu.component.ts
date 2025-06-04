@@ -41,6 +41,11 @@ export class MenuComponent implements OnInit {
         routerLink: ['/admin/pages'],
         items: [
           {
+            label: 'Blog',
+            icon: 'pi pi-fw pi-globe',
+            routerLink: ['/']
+          },
+          {
             label: 'Auth',
             icon: 'pi pi-fw pi-user',
             items: [

@@ -54,7 +54,7 @@ export class PostDetailsComponent implements OnInit {
   }
 
   public getBlogPostDetails(slug: string): void {
-    this.spinner.hide();
+    this.spinner.show();
     this.blogService.getBlogPostDetails(slug).subscribe({
       next: (res: IResponseBlogPostDetails) => {
         this.post = res;

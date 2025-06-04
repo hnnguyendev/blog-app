@@ -1,6 +1,4 @@
-import { inject } from '@angular/core';
 import { Routes } from '@angular/router';
-import { AccountService } from '@Core/auth/account.service';
 import { UserRouteAccessService } from '@Core/auth/user-route-access.service';
 import { Authority } from '@Core/config/authority.constants';
 import { LayoutComponent } from '@Layout/component/layout/layout.component';
@@ -21,14 +19,7 @@ export const appRoutes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: () => {
-      const account = inject(AccountService);
-      const isAdmin = account.hasAnyAuthority([Authority.ADMIN]);
-      if (isAdmin) {
-        return RoleRoutes.Admin;
-      }
-      return RoleRoutes.User;
-    }
+    redirectTo: ''
   },
   {
     path: '',
