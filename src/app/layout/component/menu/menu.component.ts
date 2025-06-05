@@ -25,14 +25,14 @@ export class MenuComponent implements OnInit {
         items: [
           { label: 'Post', icon: 'pi pi-fw pi-tablet', routerLink: ['/admin/posts'] },
           { label: 'User', icon: 'pi pi-fw pi-users', routerLink: ['/admin/users'] },
-          { label: 'Role & Permissions', icon: 'pi pi-fw pi-id-card', routerLink: ['/admin/roles'] }
+          { label: 'Role & Permissions', icon: 'pi pi-fw pi-id-card', routerLink: ['/admin/role-permissions'] }
         ]
       },
       {
         label: 'System Config',
         items: [
-          { label: 'Category', icon: 'pi pi-fw pi-list', routerLink: ['/admin/category'] },
-          { label: 'Tag', icon: 'pi pi-fw pi-tags', routerLink: ['/admin/tag'] }
+          { label: 'Category', icon: 'pi pi-fw pi-list', routerLink: ['/admin/categories'] },
+          { label: 'Tag', icon: 'pi pi-fw pi-tags', routerLink: ['/admin/tags'] }
         ]
       },
       {
@@ -65,6 +65,11 @@ export class MenuComponent implements OnInit {
             label: 'Not Found',
             icon: 'pi pi-fw pi-exclamation-circle',
             routerLink: ['/notfound']
+          },
+          {
+            label: 'Coming Soon',
+            icon: 'pi pi-fw pi-spinner-dotted',
+            routerLink: ['/coming-soon']
           },
           {
             label: 'Documentation',

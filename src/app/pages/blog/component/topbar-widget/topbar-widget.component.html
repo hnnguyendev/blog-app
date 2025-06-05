@@ -29,22 +29,22 @@
   <ul class="list-none p-0 m-0 flex lg:items-center select-none flex-col lg:flex-row cursor-pointer gap-8">
     <li>
       <a (click)="router.navigate(['/'], { fragment: 'home' })" pRipple class="px-0 py-4 text-surface-900 dark:text-surface-0 font-medium text-xl">
-        <span class="hover:text-[var(--primary-color)]">Home</span>
+        <span class="hover:text-primary">Home</span>
       </a>
     </li>
     <li>
-      <a (click)="router.navigate(['/'], { fragment: 'categories' })" pRipple class="px-0 py-4 text-surface-900 dark:text-surface-0 font-medium text-xl">
-        <span class="hover:text-[var(--primary-color)]">Categories</span>
+      <a (click)="router.navigate(['/coming-soon'], { fragment: 'categories' })" pRipple class="px-0 py-4 text-surface-900 dark:text-surface-0 font-medium text-xl">
+        <span class="hover:text-primary">Categories</span>
       </a>
     </li>
     <li>
-      <a (click)="router.navigate(['/'], { fragment: 'tags' })" pRipple class="px-0 py-4 text-surface-900 dark:text-surface-0 font-medium text-xl">
-        <span class="hover:text-[var(--primary-color)]">Tags</span>
+      <a (click)="router.navigate(['/coming-soon'], { fragment: 'tags' })" pRipple class="px-0 py-4 text-surface-900 dark:text-surface-0 font-medium text-xl">
+        <span class="hover:text-primary">Tags</span>
       </a>
     </li>
     <li>
-      <a (click)="router.navigate(['/'], { fragment: 'about' })" pRipple class="px-0 py-4 text-surface-900 dark:text-surface-0 font-medium text-xl">
-        <span class="hover:text-[var(--primary-color)]">About</span>
+      <a (click)="router.navigate(['/coming-soon'], { fragment: 'about' })" pRipple class="px-0 py-4 text-surface-900 dark:text-surface-0 font-medium text-xl">
+        <span class="hover:text-primary">About</span>
       </a>
     </li>
   </ul>
@@ -81,7 +81,7 @@
       </p-menu>
     } @else {
       <button pButton pRipple label="Login" routerLink="/auth/login" [rounded]="true" [text]="true"></button>
-      <button pButton pRipple label="Register" routerLink="/auth/login" [rounded]="true"></button>
+      <button pButton pRipple label="Register" routerLink="/coming-soon" [rounded]="true"></button>
     }
   </div>
 </div>

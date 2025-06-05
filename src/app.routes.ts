@@ -5,9 +5,13 @@ import { LayoutComponent } from '@Layout/component/layout/layout.component';
 import { BlogComponent } from '@Pages/blog/blog.component';
 import { ArticleWidgetComponent } from '@Pages/blog/component/article-widget/article-widget.component';
 import { PostDetailsComponent } from '@Pages/blog/component/post-details/post-details.component';
+import { CategoryComponent } from '@Pages/category/category.component';
+import { ComingSoonComponent } from '@Pages/coming-soon/coming-soon.component';
 import { Dashboard } from '@Pages/dashboard/dashboard';
 import { NotfoundComponent } from '@Pages/notfound/notfound.component';
 import { PostComponent } from '@Pages/post/post.component';
+import { RolePermissionsComponent } from '@Pages/role-permissions/role-permissions.component';
+import { TagComponent } from '@Pages/tag/tag.component';
 import { UserComponent } from '@Pages/user/user.component';
 
 const RoleRoutes = {
@@ -54,6 +58,21 @@ export const appRoutes: Routes = [
         component: UserComponent,
         title: 'User Management'
       },
+      {
+        path: 'role-permissions',
+        component: RolePermissionsComponent,
+        title: 'Role & Permissions Management'
+      },
+      {
+        path: 'categories',
+        component: CategoryComponent,
+        title: 'Category Management'
+      },
+      {
+        path: 'tags',
+        component: TagComponent,
+        title: 'Tag Management'
+      },
       { path: 'pages', loadChildren: () => import('./app/pages/pages.routes') }
     ],
     data: {
@@ -62,6 +81,7 @@ export const appRoutes: Routes = [
     canActivate: [UserRouteAccessService]
   },
   { path: 'notfound', component: NotfoundComponent, title: 'Not Found' },
+  { path: 'coming-soon', component: ComingSoonComponent, title: 'Coming Soon' },
   { path: 'auth', loadChildren: () => import('./app/pages/auth/auth.routes') },
   { path: '**', redirectTo: '/notfound' }
 ];
