@@ -119,7 +119,7 @@
       </td>
       <td style="min-width: 12rem">{{ post.title }}</td>
       <td>
-        <img [src]="post.heroImage || 'assets/img/placeholder.svg'" [alt]="'Thumbnail'" style="width: 64px" class="rounded" />
+        <p-image [alt]="'Thumbnail'" [src]="post.heroImage || 'assets/img/placeholder.svg'" [width]="'64'" [loading]="'lazy'" [preview]="true" />
       </td>
       <td>{{ post.category }}</td>
       <td>{{ post.authorName }}</td>

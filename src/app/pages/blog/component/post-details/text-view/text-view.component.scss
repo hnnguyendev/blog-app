@@ -44,6 +44,10 @@
     }
 
     pre {
+      border: 1px solid var(--surface-border);
+      background-color: var(--pre-tag-background);
+      padding: 2rem;
+      border-radius: 0.5rem;
       white-space: pre-wrap;
       word-wrap: break-word;
       word-break: break-word;

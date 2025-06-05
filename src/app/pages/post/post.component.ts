@@ -28,6 +28,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { EditorModule } from 'primeng/editor';
 import { IconFieldModule } from 'primeng/iconfield';
+import { ImageModule } from 'primeng/image';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -71,7 +72,8 @@ interface ExportColumn {
     ReactiveFormsModule,
     DatePipe,
     ValidationMessageComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    ImageModule
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
