@@ -43,15 +43,16 @@
       leaveToClass="hidden"
       leaveActiveClass="animate-fadeout"
       [hideOnOutsideClick]="true"
+      (click)="isTopbarMenuVisible = !isTopbarMenuVisible"
     >
       <i class="pi pi-user"></i>
     </button>
 
-    <div class="layout-topbar-menu hidden">
+    <div class="layout-topbar-menu" [class.hidden]="!isTopbarMenuVisible">
       <div class="layout-topbar-menu-content">
-        <button type="button" class="layout-topbar-action" routerLink="/coming-soon">
-          <i class="pi pi-user"></i>
-          <span>Profile</span>
+        <button type="button" class="layout-topbar-action" routerLink="/admin/profile/edit" (click)="isTopbarMenuVisible = false">
+          <i class="pi pi-user-edit"></i>
+          <span>Edit Profile</span>
         </button>
         <button type="button" class="layout-topbar-action" (click)="logout()">
           <i class="pi pi-sign-out"></i>

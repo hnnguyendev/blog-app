@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { Observable, ReplaySubject, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
 
+import { Authority } from '@Core/config/authority.constants';
 import { ENDPOINT, getEndpoint } from '@Core/config/endpoint.constants';
 import { Account } from './account.model';
 import { StateStorageService } from './state-storage.service';
-import { Authority } from '@Core/config/authority.constants';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -83,7 +83,34 @@ export class AccountService {
   }
 
   public redirectByRole(): void {
-    const isAdmin = this.hasAnyAuthority([Authority.ADMIN]);
-    this.router.navigateByUrl(isAdmin ? '/admin/dashboard' : '/');
+    const roleRedirectMap: { [key: string]: string } = {
+      [Authority.ADMIN]: '/admin/dashboard',
+      [Authority.USER]: '/'
+    };
+
+    const roles = [Authority.ADMIN, Authority.USER];
+    const matchedRole = roles.find((role) => this.hasAnyAuthority([role]));
+
+    const targetRoute = matchedRole ? roleRedirectMap[matchedRole] : '/';
+    this.router.navigateByUrl(targetRoute);
+  }
+
+  public redirectByPath(): void {
+    const redirectMap: { [key: string]: string } = {
+      '/profile': '/',
+      '/admin/profile': '/admin/dashboard'
+    };
+    const currentUrl = this.router.url;
+    const redirectPath = Object.keys(redirectMap).find((path) => currentUrl.startsWith(path));
+
+    if (redirectPath) {
+      this.router.navigate([redirectMap[redirectPath]]);
+    } else {
+      this.router.navigate(['/']);
+    }
+  }
+
+  public changePassword(newPassword: string, currentPassword: string): Observable<{}> {
+    return this.http.post(getEndpoint(ENDPOINT.AUTH.CHANGE_PASSWORD), { currentPassword, newPassword });
   }
 }

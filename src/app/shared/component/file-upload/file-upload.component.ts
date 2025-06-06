@@ -39,6 +39,7 @@ export class FileUploadComponent implements OnInit {
   @Input() acceptFile: string = ACCEPT_FILE.IMAGE;
   @Input() maxFileSize: string = FILE_SIZE._5MB;
   @Input() imageUpload: boolean = true;
+  @Input() avatarImage: boolean = false;
 
   @Output() onUploadFileSuccess = new EventEmitter<string>();
   @Output() onDeleteFile = new EventEmitter<void>();

@@ -1,0 +1,19 @@
+:host ::ng-deep {
+  .profile-widget {
+    max-width: 1516px;
+    margin: 0 auto;
+
+    .edit-profile-card {
+      border: 1px solid var(--surface-border);
+    }
+
+    .password-profile-card {
+      border: 1px solid var(--surface-border);
+
+      .password-profile-form {
+        max-width: 720px;
+        margin: 0 auto;
+      }
+    }
+  }
+}

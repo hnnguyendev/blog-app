@@ -7,6 +7,7 @@ export const ENDPOINT = {
   AUTH: {
     AUTHENTICATE: '/api/authenticate',
     ACCOUNT: '/api/account',
+    CHANGE_PASSWORD: '/api/account/change-password'
   },
   BLOG: {
     GET_BLOG_POSTS: '/api/posts/public',
@@ -27,7 +28,8 @@ export const ENDPOINT = {
   },
   FILE: {
     UPLOAD_IMAGE: '/api/files/image',
-    UPLOAD_FILE: '/api/files/file'
+    UPLOAD_FILE: '/api/files/file',
+    UPLOAD_AVATAR: '/api/files/avatar'
   }
 };
 

@@ -1,0 +1,94 @@
+<div class="card edit-profile-card">
+  <form (ngSubmit)="save()" [formGroup]="formGroup">
+    <div class="grid grid-cols-12 gap-4">
+      <div class="col-span-12 md:col-span-7">
+        <div class="grid grid-cols-12 gap-4">
+          <div class="col-span-12 md:col-span-6">
+            <label for="firstName" class="font-bold inline-block mb-3 mr-1">First Name</label><span class="text-red-600">*</span>
+            <input
+              pInputText
+              id="firstName"
+              type="text"
+              formControlName="firstName"
+              placeholder="Enter First Name"
+              [maxlength]="50"
+              fluid
+              [ngClass]="{
+                'ng-dirty ng-invalid': submitted && formGroup.get('firstName')?.invalid
+              }"
+            />
+            <app-validation-message [submitted]="submitted" [control]="formGroup.controls['firstName']" />
+          </div>
+          <div class="col-span-12 md:col-span-6">
+            <label for="lastName" class="font-bold inline-block mb-3 mr-1">Last Name</label><span class="text-red-600">*</span>
+            <input
+              pInputText
+              id="lastName"
+              type="text"
+              formControlName="lastName"
+              placeholder="Enter Last Name"
+              [maxlength]="50"
+              fluid
+              [ngClass]="{
+                'ng-dirty ng-invalid': submitted && formGroup.get('lastName')?.invalid
+              }"
+            />
+            <app-validation-message [submitted]="submitted" [control]="formGroup.controls['lastName']" />
+          </div>
+
+          <div class="col-span-12">
+            <label for="email" class="font-bold inline-block mb-3 mr-1">Email</label><span class="text-red-600">*</span>
+            <input
+              pInputText
+              id="email"
+              type="text"
+              formControlName="email"
+              placeholder="Enter Email"
+              [minlength]="5"
+              [maxlength]="254"
+              fluid
+              [ngClass]="{
+                'ng-dirty ng-invalid': submitted && formGroup.get('email')?.invalid
+              }"
+            />
+            <app-validation-message [submitted]="submitted" [control]="formGroup.controls['email']" />
+          </div>
+          <div class="col-span-12">
+            <label for="username" class="font-bold inline-block mb-3 mr-1">Username</label><span class="text-red-600">*</span>
+            <input
+              pInputText
+              id="username"
+              type="text"
+              formControlName="login"
+              placeholder="Enter Username"
+              [maxlength]="50"
+              fluid
+              [ngClass]="{
+                'ng-dirty ng-invalid': submitted && formGroup.get('login')?.invalid
+              }"
+            />
+            <app-validation-message [submitted]="submitted" [control]="formGroup.controls['login']" />
+          </div>
+        </div>
+      </div>
+      <div class="col-span-12 md:col-span-5">
+        <label for="imageUrl" class="font-bold inline-block mb-3 mr-1">Avatar</label><span class="text-red-600">*</span>
+        <app-file-upload
+          id="imageUrl"
+          [fileUrl]="formGroup.value?.imageUrl"
+          formControlName="imageUrl"
+          [formGroup]="formGroup"
+          [submitted]="submitted"
+          [uploadApi]="uploadAvatarApi"
+          (onUploadFileSuccess)="onUploadFile($event)"
+          [avatarImage]="true"
+        ></app-file-upload>
+        <app-validation-message [submitted]="submitted" [control]="formGroup.controls['imageUrl']" [fieldName]="'Avatar'" />
+      </div>
+    </div>
+    <div class="mt-4">
+      <p-button label="Cancel" icon="pi pi-times" [severity]="'secondary'" class="mr-4" (click)="cancel()" />
+      <p-button type="submit" label="Save" icon="pi pi-check" [loading]="loading" [disabled]="formGroup.invalid" />
+    </div>
+  </form>
+</div>

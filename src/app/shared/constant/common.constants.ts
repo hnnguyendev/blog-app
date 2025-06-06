@@ -2,7 +2,7 @@ import { EPostSectionType } from '@Shared/enum/EPostSectionType';
 
 export const PAGE_TITLE = {
   BLOG: 'Blog | hnnguyen.dev'
-}
+};
 
 export const POST_SECTION_TYPES = [
   { label: 'Text', value: EPostSectionType.TEXT },
@@ -40,4 +40,8 @@ export const FILE_SIZE = {
 
 export const ACCEPT_FILE = {
   IMAGE: '.jpg,.jpeg,.png,.heif,.heic,.gif,.svg,.bmp,.webp,.tif,.tiff,.ico'
+};
+
+export const REGEX = {
+  PASSWORD: /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}/
 };

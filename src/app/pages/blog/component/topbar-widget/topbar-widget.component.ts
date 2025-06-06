@@ -111,8 +111,11 @@ export class TopbarWidgetComponent implements OnInit {
         label: 'Profile',
         items: [
           {
-            label: 'Settings',
-            icon: 'pi pi-cog'
+            label: 'Edit Profile',
+            icon: 'pi pi-user-edit',
+            command: () => {
+              this.router.navigateByUrl('/profile/edit');
+            }
           },
           {
             label: 'Logout',

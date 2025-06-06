@@ -20,6 +20,8 @@ import { RolePipe } from '@Shared/pipe/role.pipe';
 export class TopbarComponent {
   public items!: MenuItem[];
   public account = inject(AccountService).trackCurrentAccount();
+  public isTopbarMenuVisible = false;
+
 
   public readonly layoutService = inject(LayoutService);
   private readonly loginService = inject(LoginService);

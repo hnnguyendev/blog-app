@@ -5,19 +5,18 @@ import { LayoutComponent } from '@Layout/component/layout/layout.component';
 import { BlogComponent } from '@Pages/blog/blog.component';
 import { ArticleWidgetComponent } from '@Pages/blog/component/article-widget/article-widget.component';
 import { PostDetailsComponent } from '@Pages/blog/component/post-details/post-details.component';
+import { ProfileWidgetComponent } from '@Pages/blog/component/profile-widget/profile-widget.component';
 import { CategoryComponent } from '@Pages/category/category.component';
 import { ComingSoonComponent } from '@Pages/coming-soon/coming-soon.component';
 import { Dashboard } from '@Pages/dashboard/dashboard';
 import { NotfoundComponent } from '@Pages/notfound/notfound.component';
 import { PostComponent } from '@Pages/post/post.component';
+import { ProfileEditComponent } from '@Pages/profile/profile-edit/profile-edit.component';
+import { ProfilePasswordComponent } from '@Pages/profile/profile-password/profile-password.component';
+import { ProfileComponent } from '@Pages/profile/profile.component';
 import { RolePermissionsComponent } from '@Pages/role-permissions/role-permissions.component';
 import { TagComponent } from '@Pages/tag/tag.component';
 import { UserComponent } from '@Pages/user/user.component';
-
-const RoleRoutes = {
-  Admin: 'admin/dashboard',
-  User: ''
-} as const;
 
 export const appRoutes: Routes = [
   {
@@ -36,6 +35,23 @@ export const appRoutes: Routes = [
       {
         path: 'posts/:slug',
         component: PostDetailsComponent
+      },
+      {
+        path: 'profile',
+        component: ProfileWidgetComponent,
+        children: [
+          {
+            path: 'edit',
+            component: ProfileEditComponent,
+            title: 'Edit Profile'
+          },
+          {
+            path: 'password',
+            component: ProfilePasswordComponent,
+            title: 'Change Password'
+          }
+        ],
+        canActivate: [UserRouteAccessService]
       }
     ]
   },
@@ -72,6 +88,22 @@ export const appRoutes: Routes = [
         path: 'tags',
         component: TagComponent,
         title: 'Tag Management'
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        children: [
+          {
+            path: 'edit',
+            component: ProfileEditComponent,
+            title: 'Edit Profile'
+          },
+          {
+            path: 'password',
+            component: ProfilePasswordComponent,
+            title: 'Change Password'
+          }
+        ]
       },
       { path: 'pages', loadChildren: () => import('./app/pages/pages.routes') }
     ],

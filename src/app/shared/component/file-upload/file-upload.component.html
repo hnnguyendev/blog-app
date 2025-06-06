@@ -28,6 +28,7 @@
             [disabled]="!files || files.length === 0 || uploadProgress"
           />
           @if (imageUpload) {
+            <!-- Default -->
             <p-button
               (onClick)="clearCallback()"
               icon="pi pi-times"
@@ -37,6 +38,7 @@
               [disabled]="!files || files.length === 0 || uploadProgress"
             />
           } @else {
+            <!-- Handle file upload -->
             <p-button
               icon="pi pi-times"
               (onClick)="onRemoveUploadedFile()"
@@ -48,6 +50,7 @@
           }
         </div>
 
+        <!-- Upload progress bar -->
         @if (uploadProgress) {
           <p-progressbar mode="indeterminate" [style]="{ height: '6px' }" class="w-full" styleClass="md:w-20rem h-1 w-full md:ml-auto"> </p-progressbar>
         }
@@ -66,8 +69,10 @@
             <div *ngFor="let file of files; let i = index" class="p-8 rounded-border flex flex-col border border-surface items-center gap-4">
               <div>
                 @if (imageUpload) {
+                  <!-- Default -->
                   <p-image [alt]="file.name" [src]="file.objectURL" [width]="'120'" [loading]="'lazy'" [preview]="true" />
                 } @else {
+                  <!-- Handle file upload -->
                   <i class="pi pi-file !text-7xl"></i>
                 }
               </div>
@@ -90,14 +95,17 @@
             <div *ngFor="let file of uploadedFiles; let i = index" class="card m-0 px-12 flex flex-col border border-surface items-center gap-4">
               <div>
                 @if (imageUpload) {
+                  <!-- Default -->
                   <p-image [alt]="file.name" [src]="file.objectURL" [width]="'120'" [loading]="'lazy'" [preview]="true" />
                 } @else {
+                  <!-- Handle file upload -->
                   <i class="pi pi-file !text-7xl"></i>
                 }
               </div>
               <span class="font-semibold text-ellipsis max-w-60 whitespace-nowrap overflow-hidden">{{ file.name }}</span>
               <div>{{ formatSize(file.size) }}</div>
               <p-badge value="Completed" class="mt-4" severity="success" />
+              <!-- Handle file upload: onRemoveUploadedFile() -->
               <p-button
                 icon="pi pi-times"
                 (onClick)="removeUploadedFileCallback(i); onRemoveUploadedFile()"
@@ -108,11 +116,19 @@
             </div>
           </div>
         </div>
+        <!-- Handle display image or file in update -->
         @if (files?.length === 0 && uploadedFiles?.length === 0 && hasFile) {
           <div class="flex flex-wrap gap-4 pb-4 justify-center">
             <div class="flex flex-col items-center">
               @if (imageUpload) {
-                <p-image [alt]="'Hero Image'" [src]="fileUrl" [width]="'300'" [loading]="'lazy'" [preview]="true" />
+                <p-image
+                  [styleClass]="avatarImage ? 'rounded-image' : ''"
+                  [alt]="'Hero Image'"
+                  [src]="fileUrl"
+                  [width]="avatarImage ? '200' : '300'"
+                  [loading]="'lazy'"
+                  [preview]="true"
+                />
               } @else {
                 <i class="pi pi-file !text-7xl mb-4"></i>
                 <span class="font-semibold text-ellipsis max-w-60 whitespace-nowrap overflow-hidden mb-4">{{ getFileName(fileUrl!) }}</span>

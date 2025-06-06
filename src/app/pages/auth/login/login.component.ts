@@ -46,7 +46,7 @@ export class LoginComponent implements AfterViewInit {
   constructor() {
     this.loginForm = this.fb.nonNullable.group({
       username: new FormControl<string>('', [Validators.required, Validators.maxLength(50)]),
-      password: new FormControl<string>('', [Validators.required, Validators.minLength(4)]),
+      password: new FormControl<string>('', [Validators.required, Validators.maxLength(50)]),
       rememberMe: new FormControl<boolean>(false, [Validators.required])
     });
   }

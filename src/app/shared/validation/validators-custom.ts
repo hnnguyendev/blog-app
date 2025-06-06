@@ -1,4 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { REGEX } from '@Shared/constant/common.constants';
 import { EUrlType } from '@Shared/enum/EUrlType';
 import { isSpotifyLink, isVimeoLink, isYouTubeLink } from '@Shared/helper/media.helper';
 
@@ -52,4 +53,36 @@ export default class ValidatorsCustom {
       return errors[firstType] || { invalidLink: true, message };
     };
   }
+
+  static fieldsMatch(sourceField: string, targetField: string, errorMessage: string): ValidatorFn {
+    return (formGroup: AbstractControl): ValidationErrors | null => {
+      const sourceControl = formGroup.get(sourceField);
+      const targetControl = formGroup.get(targetField);
+
+      if (!sourceControl || !targetControl) return null;
+
+      if (!targetControl.errors && sourceControl.value !== targetControl.value) {
+        targetControl.setErrors({
+          mismatch: {
+            expected: sourceControl.value,
+            actual: targetControl.value
+          },
+          message: errorMessage
+        });
+        return { mismatch: true, message: errorMessage };
+      }
+
+      return null;
+    };
+  }
+
+  static passwordStrengthValidator(message: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+        if (control?.value && !control?.value?.match(REGEX.PASSWORD)) {
+            return { password: true, message };
+        }
+        return null;
+    };
+}
+
 }
