@@ -44,7 +44,13 @@
 
     @media (max-width: 1023px) {
       .p-menu-overlay {
-        top: 258px !important;
+        top: 255px !important;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .p-menu-overlay {
+        top: 63px !important;
       }
     }
   }
