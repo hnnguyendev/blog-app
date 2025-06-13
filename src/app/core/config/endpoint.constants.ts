@@ -7,7 +7,9 @@ export const ENDPOINT = {
   AUTH: {
     AUTHENTICATE: '/api/authenticate',
     ACCOUNT: '/api/account',
-    CHANGE_PASSWORD: '/api/account/change-password'
+    CHANGE_PASSWORD: '/api/account/change-password',
+    RESET_PASSWORD_INIT: '/api/account/reset-password/init',
+    RESET_PASSWORD_FINISH: '/api/account/reset-password/finish'
   },
   BLOG: {
     GET_BLOG_POSTS: '/api/posts/public',
@@ -16,15 +18,15 @@ export const ENDPOINT = {
     GET_POST_DETAILS: (id: string) => `/api/posts/${id}`,
     ADD_POST: '/api/posts',
     UPDATE_POST: (id: string) => `/api/posts/${id}`,
-    DELETE_POSTS: '/api/posts/delete',
+    DELETE_POSTS: '/api/posts/delete'
   },
   CATEGORY: {
     GET_CATEGORY_OPTIONS: '/api/categories/options',
-    ADD_CATEGORY: '/api/categories',
+    ADD_CATEGORY: '/api/categories'
   },
   TAG: {
     GET_TAG_OPTIONS: '/api/tags/options',
-    ADD_TAG: '/api/tags',
+    ADD_TAG: '/api/tags'
   },
   FILE: {
     UPLOAD_IMAGE: '/api/files/image',

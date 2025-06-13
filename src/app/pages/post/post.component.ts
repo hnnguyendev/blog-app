@@ -295,7 +295,7 @@ export class PostComponent extends BaseDestroyableDirective implements OnInit {
     this.page = PAGINATION_DEFAULT.PAGE;
     this.loadAll();
     this.hideDialog();
-    this.showToast('success', 'Successful', successMsg);
+    this.showToast('success', 'Success', successMsg);
   }
 
   public hideDialog(): void {
@@ -359,7 +359,7 @@ export class PostComponent extends BaseDestroyableDirective implements OnInit {
         this.page = PAGINATION_DEFAULT.PAGE;
         this.loadAll();
         this.selectedPosts = [];
-        this.showToast('success', 'Successful', `${message} Deleted`);
+        this.showToast('success', 'Success', `${message} Deleted`);
       },
       error: () => {
         this.spinner.hide();

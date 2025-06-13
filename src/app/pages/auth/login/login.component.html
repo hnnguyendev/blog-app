@@ -55,7 +55,9 @@
               <p-checkbox id="rememberMe" binary class="mr-2" name="rememberMe" formControlName="rememberMe"></p-checkbox>
               <label for="rememberMe">Remember me</label>
             </div>
-            <span class="font-medium no-underline ml-2 text-right cursor-pointer text-primary">Forgot password?</span>
+            <span class="font-medium no-underline ml-2 text-right cursor-pointer text-primary" [routerLink]="'/auth/password-reset/init'"
+              >Forgot password?</span
+            >
           </div>
           <p-button type="submit" label="Sign In" styleClass="w-full"></p-button>
         </form>

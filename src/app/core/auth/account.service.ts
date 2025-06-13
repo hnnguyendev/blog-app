@@ -113,4 +113,12 @@ export class AccountService {
   public changePassword(newPassword: string, currentPassword: string): Observable<{}> {
     return this.http.post(getEndpoint(ENDPOINT.AUTH.CHANGE_PASSWORD), { currentPassword, newPassword });
   }
+
+  public resetPasswordInit(mail: string): Observable<{}> {
+    return this.http.post(getEndpoint(ENDPOINT.AUTH.RESET_PASSWORD_INIT), mail);
+  }
+
+  public resetPasswordFinish(key: string, newPassword: string): Observable<{}> {
+    return this.http.post(getEndpoint(ENDPOINT.AUTH.RESET_PASSWORD_FINISH), { key, newPassword });
+  }
 }
