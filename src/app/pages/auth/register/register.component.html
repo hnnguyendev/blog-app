@@ -3,7 +3,7 @@
   <div class="flex flex-col items-center justify-center max-w-[568.4px]">
     <div style="border-radius: 56px; padding: 0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%)">
       <div class="w-full bg-surface-0 dark:bg-surface-900 py-20 px-8 sm:px-20" style="border-radius: 53px">
-        @if (!requestCompleted()) {
+        @if (!registered()) {
           <div class="text-center mb-8">
             <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 128 128" class="mb-8 h-14 shrink-0 mx-auto">
               <path
@@ -11,34 +11,101 @@
                 fill="var(--primary-color)"
               ></path>
             </svg>
-            <div class="text-surface-900 dark:text-surface-0 text-3xl font-medium mb-4">Reset your password</div>
-            <span class="text-muted-color font-medium">To reset your password, enter the email address you use to log in.</span>
+            <div class="text-surface-900 dark:text-surface-0 text-3xl font-medium mb-4">Create Your Account</div>
+            <span class="text-muted-color font-medium">Join us by filling in the details below. It only takes a minute!</span>
           </div>
 
-          <form (ngSubmit)="requestReset()" [formGroup]="resetRequestForm">
+          <form (ngSubmit)="register()" [formGroup]="registerForm">
             <div class="mb-7">
-              <label for="email" class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2">Email</label>
+              <label for="password" class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2">Username</label>
               <input
-                #email
+                #username
+                pInputText
+                id="username"
+                type="text"
+                formControlName="login"
+                placeholder="Enter Username"
+                [maxlength]="50"
+                class="w-full md:w-[30rem]"
+                [ngClass]="{
+                  'ng-dirty ng-invalid': submitted && registerForm.get('login')?.invalid
+                }"
+              />
+              <app-validation-message [submitted]="submitted" [control]="registerForm.controls['login']" [fieldName]="'Username'" />
+            </div>
+            <div class="mb-7">
+              <label for="password" class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2">Email</label>
+              <input
                 pInputText
                 id="email"
                 type="text"
-                placeholder="Your email"
-                class="w-full md:w-[30rem]"
-                name="email"
                 formControlName="email"
+                placeholder="Enter Email"
+                [minlength]="5"
+                [maxlength]="254"
+                class="w-full md:w-[30rem]"
                 [ngClass]="{
-                  'ng-dirty ng-invalid': submitted && resetRequestForm.get('email')?.invalid
+                  'ng-dirty ng-invalid': submitted && registerForm.get('email')?.invalid
                 }"
               />
-              <app-validation-message [submitted]="submitted" [control]="resetRequestForm.controls['email']" />
+              <app-validation-message [submitted]="submitted" [control]="registerForm.controls['email']" />
+            </div>
+            <div class="mb-7">
+              <label for="password" class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2">Password</label>
+              <p-password
+                id="password"
+                placeholder="Enter Password"
+                formControlName="password"
+                [toggleMask]="true"
+                [maxlength]="50"
+                [ngClass]="{
+                  'ng-dirty ng-invalid': submitted && registerForm.get('password')?.invalid
+                }"
+                fluid
+              >
+                <ng-template #header>
+                  <div class="font-semibold text-xm mb-4">Pick a password</div>
+                </ng-template>
+                <ng-template #footer>
+                  <p-divider />
+                  <ul class="pl-2 ml-2 my-0 leading-normal">
+                    <li>At least one lowercase</li>
+                    <li>At least one uppercase</li>
+                    <li>At least one numeric</li>
+                    <li>At least one special character</li>
+                    <li>Minimum 8 characters</li>
+                  </ul>
+                </ng-template>
+              </p-password>
+              <app-validation-message [submitted]="submitted" [control]="registerForm.controls['password']" />
             </div>
 
-            <p-button type="submit" label="Get reset link" styleClass="w-full"></p-button>
+            <div class="mb-7">
+              <label for="confirmPassword" class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2">Confirm Password</label>
+              <p-password
+                id="confirmPassword"
+                placeholder="Enter Confirm Password"
+                formControlName="confirmPassword"
+                [toggleMask]="true"
+                [feedback]="false"
+                [maxlength]="50"
+                class="w-full md:w-[30rem]"
+                [ngClass]="{
+                  'ng-dirty ng-invalid': submitted && registerForm.get('confirmPassword')?.invalid
+                }"
+                fluid
+              >
+              </p-password>
+              <app-validation-message [submitted]="submitted" [control]="registerForm.controls['confirmPassword']" />
+            </div>
+
+            <p-button type="submit" label="Register" styleClass="w-full"></p-button>
 
             <div class="text-center mt-8">
-              <span>Never mind! </span
-              ><span class="font-medium no-underline cursor-pointer text-primary" [routerLink]="'/auth/login'">Take me back to login</span>
+              <span>Already have an account? </span>
+            </div>
+            <div class="text-center">
+              <span class="font-medium no-underline cursor-pointer text-primary" [routerLink]="'/auth/login'">Log in</span>
             </div>
           </form>
         } @else {
@@ -52,7 +119,7 @@
             <div class="text-surface-900 dark:text-surface-0 text-3xl font-medium mb-4">Check your email</div>
             <img src="assets/img/paper-airplane.svg" alt="Paper Airplane" class="mb-5" width="100%" />
             <span class="font-medium"
-              >Check your <span class="font-semibold">{{ emailRequested() }}</span> inbox for instructions from us on how to reset your password.</span
+              >Check your <span class="font-semibold">{{ registerEmail() }}</span> inbox for instructions from us on how to verify your account.</span
             >
           </div>
           <div class="text-center mt-8">

@@ -1,0 +1,20 @@
+<svg height="143" width="292" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" fill-rule="evenodd" style="" transform="matrix(1.716138, 0, 0, 1.541526, -219.167816, 15.534703)">
+    <g fill-rule="nonzero"></g>
+    <path d="m134 60s38 16 50-6c4-7 2-18-3-20-10-3-13 31 8 29 10-1 23-4 40-22" stroke="#231f20" stroke-width=".6"></path>
+    <path d="m226 15 25 42c2 2 5 2 6 0l35-56-64 9c-2 0-4 3-2 5" fill="#7e9cf1" fill-rule="nonzero"></path>
+    <path d="m292 1-64 9c-2 0-4 3-2 5l2 3z" fill="white" fill-rule="nonzero"></path>
+    <path d="m267 7-26 5a1 1 0 1 1 0-2l26-4h1z" fill="#e2e6e7" fill-rule="nonzero"></path>
+    <path d="m283 7-48 25v15l7-4-3-6z" fill="#587ccb" fill-rule="nonzero"></path>
+    <path d="m244 27-4-7 13-4 3 5" fill="white" fill-rule="nonzero"></path>
+    <path d="m256 16 12-5m-10 7 6-3m-15 21 10-9m-9 11 10-9m-5 16 9-11m-8 13 9-11m-7 13 5-7m-12-2 7-7" stroke="#587ccb" stroke-width=".6"></path>
+    <path d="m229 13a1 1 0 1 1 -2-1 1 1 0 0 1 2 1" fill="#e7655b" fill-rule="nonzero"></path>
+    <path d="m232 12a1 1 0 1 1 -2 0 1 1 0 0 1 2 0" fill="#f8de70" fill-rule="nonzero"></path>
+    <path d="m235 12a1 1 0 1 1 -2-1 1 1 0 0 1 2 1" fill="#00c6b6" fill-rule="nonzero"></path>
+    <path d="m237 11h1m-1 0h-1l1 1" stroke="#bdbebd" stroke-width=".6"></path>
+    <path d="m263 25 7 9 7-13-4-4z" fill="white" fill-rule="nonzero"></path>
+    <path d="m235 47 4-10 3 5z" fill="#587ccb" fill-rule="nonzero"></path>
+    <path d="m292 1-64 9" stroke="#aeaeae" stroke-width=".6"></path>
+    <path d="m235 46 4-9 6-4" stroke="#376498" stroke-width=".6"></path>
+  </g>
+</svg>

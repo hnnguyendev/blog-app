@@ -1,11 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, Signal, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, ReplaySubject, of } from 'rxjs';
-import { catchError, shareReplay, tap } from 'rxjs/operators';
-
 import { Authority } from '@Core/config/authority.constants';
 import { ENDPOINT, getEndpoint } from '@Core/config/endpoint.constants';
+import { IRegistration } from '@Shared/interface/auth/IRegistration';
+import { Observable, ReplaySubject, of } from 'rxjs';
+import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { Account } from './account.model';
 import { StateStorageService } from './state-storage.service';
 
@@ -120,5 +120,15 @@ export class AccountService {
 
   public resetPasswordFinish(key: string, newPassword: string): Observable<{}> {
     return this.http.post(getEndpoint(ENDPOINT.AUTH.RESET_PASSWORD_FINISH), { key, newPassword });
+  }
+
+  public register(registration: IRegistration): Observable<{}> {
+    return this.http.post(getEndpoint(ENDPOINT.AUTH.REGISTER), registration);
+  }
+
+  public activate(key: string): Observable<{}> {
+    return this.http.get(getEndpoint(ENDPOINT.AUTH.ACTIVATE), {
+      params: new HttpParams().set('key', key)
+    });
   }
 }

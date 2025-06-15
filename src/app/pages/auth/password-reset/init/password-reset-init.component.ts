@@ -21,8 +21,8 @@ export class PasswordResetInitComponent implements AfterViewInit {
   public email = viewChild.required<ElementRef>('email');
   public resetRequestForm: FormGroup;
   public submitted: boolean = false;
-  public sentComplete = signal(false);
-  public sentEmail = signal('');
+  public requestCompleted = signal(false);
+  public emailRequested = signal('');
 
   private readonly messageService = inject(MessageService);
   private readonly fb = inject(FormBuilder);
@@ -49,8 +49,8 @@ export class PasswordResetInitComponent implements AfterViewInit {
     this.spinner.show();
     this.accountService.resetPasswordInit(email).subscribe({
       next: () => {
-        this.sentComplete.set(true);
-        this.sentEmail.set(email);
+        this.requestCompleted.set(true);
+        this.emailRequested.set(email);
         this.spinner.hide();
       },
       error: () => {

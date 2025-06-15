@@ -9,7 +9,9 @@ export const ENDPOINT = {
     ACCOUNT: '/api/account',
     CHANGE_PASSWORD: '/api/account/change-password',
     RESET_PASSWORD_INIT: '/api/account/reset-password/init',
-    RESET_PASSWORD_FINISH: '/api/account/reset-password/finish'
+    RESET_PASSWORD_FINISH: '/api/account/reset-password/finish',
+    REGISTER: '/api/register',
+    ACTIVATE: '/api/activate'
   },
   BLOG: {
     GET_BLOG_POSTS: '/api/posts/public',

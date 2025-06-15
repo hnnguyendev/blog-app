@@ -9,7 +9,8 @@ export class ValidationService {
       min: '{field} must be at least {value}.',
       max: '{field} must be at most {value}.',
       maxlength: `{field} must be no more than {maxlength} characters.`,
-      minlength: `{field} needs {minlength} or more alphanumeric characters.`
+      minlength: `{field} needs {minlength} or more alphanumeric characters.`,
+      pattern: `{field} contains invalid characters.`
     };
     return config[validatorName as keyof typeof config];
   }
