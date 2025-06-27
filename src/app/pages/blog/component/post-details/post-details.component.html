@@ -5,9 +5,15 @@
       <app-statement></app-statement>
       <h1 class="md:text-5xl">{{ post?.title }}</h1>
       <div class="flex items-center mb-10">
-        <p-avatar [image]="post?.imageUrl || 'assets/img/default-avatar.png'" class="mr-4" size="large" shape="circle"></p-avatar>
+        <p-avatar
+          [image]="post?.imageUrl || 'assets/img/default-avatar.png'"
+          class="mr-4 cursor-pointer"
+          size="large"
+          shape="circle"
+          (click)="openAuthorProfileInNewTab()"
+        ></p-avatar>
         <div class="flex flex-col">
-          <span>{{ post?.authorName }}</span>
+          <span class="cursor-pointer" (click)="openAuthorProfileInNewTab()">{{ post?.authorName }}</span>
           <span class="text-sm text-muted-color">{{ post?.lastUpdated | date }}</span>
         </div>
       </div>

@@ -9,12 +9,12 @@ import { BlogService } from '@Shared/service/blog.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AvatarModule } from 'primeng/avatar';
 import { AudioViewComponent } from './audio-view/audio-view.component';
+import { FileViewComponent } from './file-view/file-view.component';
 import { ImageViewComponent } from './image-view/image-view.component';
 import { StatementComponent } from './statement/statement.component';
 import { SubscribeNewsletterComponent } from './subscribe-newsletter/subscribe-newsletter.component';
 import { TextViewComponent } from './text-view/text-view.component';
 import { VideoViewComponent } from './video-view/video-view.component';
-import { FileViewComponent } from './file-view/file-view.component';
 
 @Component({
   selector: 'app-post-details',
@@ -66,5 +66,13 @@ export class PostDetailsComponent implements OnInit {
         console.error('Error fetching post details');
       }
     });
+  }
+
+  public openAuthorProfileInNewTab() {
+    const website = this.post?.website;
+    if (!website) {
+      return;
+    }
+    window.open(website, '_blank');
   }
 }

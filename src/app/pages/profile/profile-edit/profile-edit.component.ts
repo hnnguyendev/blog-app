@@ -6,7 +6,9 @@ import { AccountService } from '@Core/auth/account.service';
 import { ENDPOINT } from '@Core/config/endpoint.constants';
 import { environment } from '@Environments/environment';
 import { FileUploadComponent } from '@Shared/component/file-upload/file-upload.component';
+import { EUrlType } from '@Shared/enum/EUrlType';
 import { ValidationMessageComponent } from '@Shared/validation/validation-message/validation-message.component';
+import ValidatorsCustom from '@Shared/validation/validators-custom';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -57,8 +59,9 @@ export class ProfileEditComponent implements OnInit {
         nonNullable: true,
         validators: [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]
       }),
-      login: new FormControl<string>({ value: '', disabled: true }, [Validators.required, Validators.maxLength(50)]),
+      login: new FormControl<string>({ value: initialAccount.login, disabled: true }, [Validators.required, Validators.maxLength(50)]),
       imageUrl: new FormControl<string>('', [Validators.required]),
+      website: new FormControl<string>('', [Validators.maxLength(255), ValidatorsCustom.url([EUrlType.WEBSITE], 'Invalid website URL')]),
       langKey: new FormControl(initialAccount.langKey, { nonNullable: true }),
       activated: new FormControl(initialAccount.activated, { nonNullable: true }),
       authorities: new FormControl(initialAccount.authorities, { nonNullable: true })

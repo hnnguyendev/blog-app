@@ -47,6 +47,11 @@ function extractVimeoVideoId(url: string): string | null {
   return match ? match[1] : null;
 }
 
+export const isWebsiteUrl = (url: string): boolean => {
+  const websiteRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
+  return websiteRegex.test(url);
+};
+
 export const isYouTubeLink = (url: string): boolean => {
   const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
   return youtubeRegex.test(url);

@@ -49,7 +49,8 @@ export const appRoutes: Routes = [
             path: 'password',
             component: ProfilePasswordComponent,
             title: 'Change Password'
-          }
+          },
+          { path: '**', redirectTo: '/notfound' }
         ],
         canActivate: [UserRouteAccessService]
       }
@@ -102,10 +103,12 @@ export const appRoutes: Routes = [
             path: 'password',
             component: ProfilePasswordComponent,
             title: 'Change Password'
-          }
+          },
+          { path: '**', redirectTo: '/notfound' }
         ]
       },
-      { path: 'pages', loadChildren: () => import('./app/pages/pages.routes') }
+      { path: 'pages', loadChildren: () => import('./app/pages/pages.routes') },
+      { path: '**', redirectTo: '/notfound' }
     ],
     data: {
       authorities: [Authority.ADMIN]

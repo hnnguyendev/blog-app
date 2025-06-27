@@ -1,7 +1,7 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { REGEX } from '@Shared/constant/common.constants';
 import { EUrlType } from '@Shared/enum/EUrlType';
-import { isSpotifyLink, isVimeoLink, isYouTubeLink } from '@Shared/helper/media.helper';
+import { isSpotifyLink, isVimeoLink, isWebsiteUrl, isYouTubeLink } from '@Shared/helper/media.helper';
 
 export default class ValidatorsCustom {
   static editorRequired(message: string): ValidatorFn {
@@ -18,12 +18,14 @@ export default class ValidatorsCustom {
 
   static url(urlTypes: EUrlType[], message: string): ValidatorFn {
     const errors = {
+      [EUrlType.WEBSITE]: { websiteUrl: true, message },
       [EUrlType.YOUTUBE]: { youtubeUrl: true, message },
       [EUrlType.VIMEO]: { vimeoUrl: true, message },
       [EUrlType.SPOTIFY]: { spotifyUrl: true, message }
     };
 
     const validators = {
+      [EUrlType.WEBSITE]: isWebsiteUrl,
       [EUrlType.YOUTUBE]: isYouTubeLink,
       [EUrlType.VIMEO]: isVimeoLink,
       [EUrlType.SPOTIFY]: isSpotifyLink

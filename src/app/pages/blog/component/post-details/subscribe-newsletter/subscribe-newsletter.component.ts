@@ -26,7 +26,7 @@ export class SubscribeNewsletterComponent {
     });
   }
 
-  subscribe(): void {
+  public subscribe(): void {
     this.submitted = true;
 
     if (this.subscribeForm.invalid) {

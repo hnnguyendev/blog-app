@@ -69,6 +69,22 @@
             />
             <app-validation-message [submitted]="submitted" [control]="formGroup.controls['login']" />
           </div>
+          <div class="col-span-12">
+            <label for="website" class="font-bold inline-block mb-3 mr-1">Website</label>
+            <input
+              pInputText
+              id="website"
+              type="text"
+              formControlName="website"
+              placeholder="Enter Website"
+              [maxlength]="255"
+              fluid
+              [ngClass]="{
+                'ng-dirty ng-invalid': submitted && formGroup.get('website')?.invalid
+              }"
+            />
+            <app-validation-message [submitted]="submitted" [control]="formGroup.controls['website']" />
+          </div>
         </div>
       </div>
       <div class="col-span-12 md:col-span-5">

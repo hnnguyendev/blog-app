@@ -13,6 +13,7 @@ export interface IResponseBlogPostDetails {
   tags: ITag[];
   authorName: string;
   imageUrl: string;
+  website: string;
   lastUpdated: Date | string;
   sections: ISectionContent[];
 }
