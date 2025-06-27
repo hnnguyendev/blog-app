@@ -115,6 +115,8 @@ export class PostComponent extends BaseDestroyableDirective implements OnInit {
     style: { width: '1536px' },
     draggable: false,
     resizable: false,
+    maximizable: true,
+    closable: false,
     showEffect: 'fade'
   };
 
