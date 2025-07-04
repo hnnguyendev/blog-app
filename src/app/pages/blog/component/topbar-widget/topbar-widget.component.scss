@@ -25,6 +25,20 @@
 }
 
 :host ::ng-deep {
+  .topbar-blur-bg {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .topbar-widget {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: transparent;
+    max-width: 1532px;
+    margin: 0 auto;
+  }
+
   .avatar-menu {
     width: 2.5rem;
     height: 2.5rem;
@@ -36,6 +50,12 @@
   }
 
   .menu-custom {
+    .p-menu-overlay {
+      background-color: rgba(var(--blur-surface-rgba), 0.2);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+
     @media (min-width: 1545px) {
       .p-menu-overlay {
         left: 1293px !important;
@@ -44,7 +64,7 @@
 
     @media (max-width: 1023px) {
       .p-menu-overlay {
-        top: 255px !important;
+        top: 257px !important;
       }
     }
 
